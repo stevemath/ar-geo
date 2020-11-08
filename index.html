@@ -27,11 +27,10 @@
            </a-assets>
 
 
-        <a-entity gltf-model="./assets/magnemite/scene.gltf" rotation="0 180 0" scale="0.15 0.15 0.15" gps-entity-place="longitude: -80.570504; latitude: 43.497265;" animation-mixer/>
-
+       
      
         
-        <a-entity id="locale3"  rotation="0 180 0"  gps-entity-place="longitude: -80.570667; latitude: 43.497601;" class="hotspot koolaid" look-at="[gps-camera]" ></a-entity>
+        <a-entity id="locale3" src="#img1" rotation="0 180 0"   class="hotspot koolaid" look-at="[gps-camera]" ></a-entity>
 
 
         <a-camera gps-camera rotation-reader></a-camera>
@@ -40,6 +39,8 @@
 
     <script>
         //43.497710 -80.570740
+//        <a-entity gltf-model="./assets/magnemite/scene.gltf" rotation="0 180 0" scale="0.15 0.15 0.15" gps-entity-place="longitude: -80.570504; latitude: 43.497265;" animation-mixer/>
+
 var locales =[
 {id:1,label:"Home", lat:"43.497694", long:"-80.570723", desc:"707 Jacob Lane", link:""},
 {id:2,label:"Snaggletooth", lat:"43.497601", long:"-80.570667", desc:"709 Jacob Lane", link:""},
