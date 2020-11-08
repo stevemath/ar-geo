@@ -5,7 +5,8 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>GeoAR.js demo</title>
     <link rel="stylesheet" href="css/pagestyles.css">
-    <script src='https://aframe.io/releases/0.9.2/aframe.min.js'></script>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+  
     <script src="https://raw.githack.com/jeromeetienne/AR.js/master/aframe/build/aframe-ar.min.js"></script>
     <script src="https://raw.githack.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
       
@@ -30,7 +31,7 @@
        
      
         
-        <a-image id="locale3" src="#img1" rotation="0 180 0"  gps-entity-place="longitude: -80.570504; latitude: 43.497265;" class="hotspot koolaid"  ></a-image>
+        <a-image id="locale3" src="#img1" rotation="0 180 0"  gps-entity-place="longitude: -80.570504; latitude: 43.497265;" class="hotspot koolaid"  look-at="[gps-camera]"></a-image>
 
 
         <a-camera gps-camera rotation-reader alert="true"></a-camera>
