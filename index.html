@@ -54,7 +54,7 @@ var locales =[
 
 setInterval(()=>{
     try{
-    var distanceMsg = document.querySelector('[gps-entity-place]').getAttribute('distanceMsg');
+    var distanceMsg = document.querySelector('[gps-entity-place]')[0].getAttribute('distanceMsg');
 alert(distanceMsg); 
     }catch(err){
         console.log(err);
