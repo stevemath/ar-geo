@@ -25,7 +25,7 @@
         <a-assets id="assetsPanel" timeout="35000">
 
             <img id="img1"  src="assets/raccoon.png"   />
-            <a-asset-item id="model1"  src="assets/dancer3.glb" ></a-asset-item>
+            <a-asset-item id="model1"  src="assets/dancer5.glb" ></a-asset-item>
            </a-assets>
 
 
@@ -33,8 +33,8 @@
 
 
         <a-image id="locale3" src="#img1" rotation="0 180 0"  scale="2.5 2.5 2.5" gps-entity-place="longitude:-80.570665; latitude: 43.497871;" class="hotspot glare" look-controls-enabled='false' arjs-look-controls='smoothingFactor: 0.1'  look-at="[gps-camera]"></a-image>
-        <a-gltf-model id="locale2" src="#model1" rotation="0 180 0"  gps-entity-place="longitude: -80.570667; latitude: 43.497601;" scale="2.5 2.5 2.5"  class="hotspot snaggle" look-controls-enabled='false' arjs-look-controls='smoothingFactor: 0.1'  look-at="[gps-camera]"></a-gltf-model>
-
+        <a-gltf-model id="locale2" src="#model1" rotation="0 180 0" scale="0.015 0.015 0.015"  animation-mixer="clip: DancingTwerk" gps-entity-place="longitude: -80.570667; latitude: 43.497601;" scale="2.5 2.5 2.5"  class="hotspot snaggle" look-controls-enabled='false' arjs-look-controls='smoothingFactor: 0.1'  look-at="[gps-camera]"></a-gltf-model>
+       
 
         <a-camera gps-camera rotation-reader alert="true" ></a-camera>
     </a-scene>
