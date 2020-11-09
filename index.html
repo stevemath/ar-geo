@@ -32,14 +32,15 @@
 
 
 
-        <a-image id="locale3" src="#img1" rotation="0 180 0"  scale="2.5 2.5 2.5" gps-entity-place="longitude: -80.570667; latitude: 43.497601;" class="hotspot koolaid" look-controls-enabled='false' arjs-look-controls='smoothingFactor: 0.1'  look-at="[gps-camera]"></a-image>
-        <a-image id="locale2" src="#model1" rotation="0 180 0"  scale="2.5 2.5 2.5" gps-entity-place="longitude: -80.570665; latitude: 43.497871;" class="hotspot glare" look-controls-enabled='false' arjs-look-controls='smoothingFactor: 0.1'  look-at="[gps-camera]"></a-image>
+        <a-image id="locale3" src="#img1" rotation="0 180 0"  scale="2.5 2.5 2.5" gps-entity-place="longitude:-80.570665; latitude: 43.497871;" class="hotspot glare" look-controls-enabled='false' arjs-look-controls='smoothingFactor: 0.1'  look-at="[gps-camera]"></a-image>
+        <a-gltf-model id="locale2" src="#model1" rotation="0 180 0"  gps-entity-place="longitude: -80.570667; latitude: 43.497601;" scale="2.5 2.5 2.5"  class="hotspot snaggle" look-controls-enabled='false' arjs-look-controls='smoothingFactor: 0.1'  look-at="[gps-camera]"></a-gltf-model>
 
 
         <a-camera gps-camera rotation-reader alert="true" ></a-camera>
     </a-scene>
 
 <div id="Dist" class="dist-overlay">distance</div>
+<div id="Dist2" class="dist-overlay  lower">distance</div>
     <script>
         //43.497710 -80.570740
 //        <a-entity gltf-model="./assets/magnemite/scene.gltf" rotation="0 180 0" scale="0.15 0.15 0.15" gps-entity-place="longitude: -80.570504; latitude: 43.497265;" animation-mixer/>
@@ -57,12 +58,16 @@
 setInterval(()=>{
     try{
         var hotspot = document.querySelector('.glare');
+        var hotspot2 = document.querySelector('.snaggle');
 console.log(hotspot)
 
     var distanceMsg = hotspot.getAttribute('distanceMsg');
+    var distanceMsg2 = hotspot2.getAttribute('distanceMsg');
     console.log(distanceMsg);
     var distTxt = document.getElementById("Dist")
+    var distTxt2 = document.getElementById("Dist2")
     distTxt.innerHTML = distanceMsg;
+    distTxt2.innerHTML = distanceMsg;
 //alert(distanceMsg);
     }catch(err){
         console.log(err);
