@@ -6,14 +6,14 @@
     <title>GeoAR.js demo</title>
     <link rel="stylesheet" href="css/pagestyles.css">
     <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
-  
+
     <script src="https://raw.githack.com/jeromeetienne/AR.js/master/aframe/build/aframe-ar.min.js"></script>
     <script src="https://raw.githack.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
-      
+
     <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
- 
+
     <script>
-        THREEx.ArToolkitContext.baseURL = 'https://raw.githack.com/jeromeetienne/ar.js/master/three.js/'
+       // THREEx.ArToolkitContext.baseURL = 'https://raw.githack.com/jeromeetienne/ar.js/master/three.js/'
     </script>
 </head>
 
@@ -22,40 +22,46 @@
         vr-mode-ui="enabled: false"
 		embedded
         arjs='sourceType: webcam; videoTexture: true;debugUIEnabled: false;'>
-        <a-assets id="assetsPanel" timeout="35000">  
-      
+        <a-assets id="assetsPanel" timeout="35000">
+
             <img id="img1"  src="assets/raccoon.png"   />
            </a-assets>
 
 
-       
-     
-        
+
+
+
         <a-image id="locale3" src="#img1" rotation="0 180 0"  scale="2.5 2.5 2.5" gps-entity-place="longitude: -80.570667; latitude: 43.497601;" class="hotspot koolaid" look-controls-enabled='false' arjs-look-controls='smoothingFactor: 0.1'  look-at="[gps-camera]"></a-image>
 
 
         <a-camera gps-camera rotation-reader alert="true" ></a-camera>
     </a-scene>
-    
 
+<div id="Dist" class="dist-overlay">distance</div>
     <script>
         //43.497710 -80.570740
 //        <a-entity gltf-model="./assets/magnemite/scene.gltf" rotation="0 180 0" scale="0.15 0.15 0.15" gps-entity-place="longitude: -80.570504; latitude: 43.497265;" animation-mixer/>
 
-var locales =[
+
+
+(function(){
+    var locales =[
 {id:1,label:"Home", lat:"43.497694", long:"-80.570723", desc:"707 Jacob Lane", link:""},
 {id:2,label:"Snaggletooth", lat:"43.497601", long:"-80.570667", desc:"709 Jacob Lane", link:""},
 {id:3,label:"Hey Koolaid", lat:"43.497265", long:"-80.570504", desc:"627 Osprey", link:""},
 {id:4,label:"Glaremeisters", lat:"43.497871", long:"-80.570665", desc:"703 Jacob Lane", link:""},
 
 ]
-
-(function(){
-
 setInterval(()=>{
     try{
-    var distanceMsg = document.querySelector('[gps-entity-place]')[0].getAttribute('distanceMsg');
-alert(distanceMsg); 
+        var hotspot = document.querySelector('.hotspot');
+console.log(hotspot)
+
+    var distanceMsg = hotspot.getAttribute('distanceMsg');
+    console.log(distanceMsg);
+    var distTxt = document.getElementById("Dist")
+    distTxt.innerHTML = distanceMsg;
+//alert(distanceMsg);
     }catch(err){
         console.log(err);
     }
