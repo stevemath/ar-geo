@@ -25,6 +25,7 @@
         <a-assets id="assetsPanel" timeout="35000">
 
             <img id="img1"  src="assets/raccoon.png"   />
+            <a-asset-item id="model1"  src="assets/dancer3.glb" ></a-asset-item>
            </a-assets>
 
 
@@ -32,6 +33,7 @@
 
 
         <a-image id="locale3" src="#img1" rotation="0 180 0"  scale="2.5 2.5 2.5" gps-entity-place="longitude: -80.570667; latitude: 43.497601;" class="hotspot koolaid" look-controls-enabled='false' arjs-look-controls='smoothingFactor: 0.1'  look-at="[gps-camera]"></a-image>
+        <a-image id="locale2" src="#model1" rotation="0 180 0"  scale="2.5 2.5 2.5" gps-entity-place="longitude: -80.570665; latitude: 43.497871;" class="hotspot glare" look-controls-enabled='false' arjs-look-controls='smoothingFactor: 0.1'  look-at="[gps-camera]"></a-image>
 
 
         <a-camera gps-camera rotation-reader alert="true" ></a-camera>
@@ -54,7 +56,7 @@
 ]
 setInterval(()=>{
     try{
-        var hotspot = document.querySelector('.hotspot');
+        var hotspot = document.querySelector('.glare');
 console.log(hotspot)
 
     var distanceMsg = hotspot.getAttribute('distanceMsg');
