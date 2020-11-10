@@ -32,10 +32,10 @@
 
 
 
-       <a-link title="Birch 2" scale=".3 .3 .3" class="hotspot birch2" gps-entity-place="longitude:-80.57087151; latitude: 43.49755989;" look-at="[gps-camera]" ></a-link>
-       <a-link title="Birch 1" scale=".3 .3 .3" class="hotspot birch1" gps-entity-place="longitude:-80.57090778; latitude: 43.49765251;" look-at="[gps-camera]" ></a-link>
+       <a-link title="Birch 2" scale=".3 .3 .3" class="hotspot birch2" gps-entity-place="longitude:-80.57087151; latitude: 43.49755989;" look-at="[gps-camera]" look-controls-enabled='false' arjs-look-controls='smoothingFactor: 0.1' ></a-link>
+       <a-link title="Birch 1" scale=".3 .3 .3" class="hotspot birch1" gps-entity-place="longitude:-80.57090778; latitude: 43.49765251;" look-at="[gps-camera]" look-controls-enabled='false' arjs-look-controls='smoothingFactor: 0.1' ></a-link>
 
-        <a-camera gps-camera rotation-reader alert="true" rotation="0 280 -45"></a-camera>
+        <a-camera gps-camera rotation-reader alert="true" rotation="0 280 -45" gpsMinDistance="6" gpsTimeInterval="5000"  ></a-camera>
     </a-scene>
 
 <div id="Dist" class="dist-overlay">distance</div>
