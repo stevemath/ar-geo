@@ -5,7 +5,7 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>GeoAR.js demo</title>
     <link rel="stylesheet" href="css/pagestyles.css">
-    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://aframe.io/releases/1.0.0/aframe.min.js"></script>
 
     <script src="https://raw.githack.com/jeromeetienne/AR.js/master/aframe/build/aframe-ar.min.js"></script>
     <script src="https://raw.githack.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
@@ -32,10 +32,10 @@
 
 
 
-       <a-link title="Birch 2" scale=".3 .3 .3" class="hotspot birch2" gps-entity-place="longitude:-80.57087151; latitude: 43.49755989;" look-at="[gps-camera]" look-controls-enabled='false' arjs-look-controls='smoothingFactor: 0.1' ></a-link>
-       <a-link title="Birch 1" scale=".3 .3 .3" class="hotspot birch1" gps-entity-place="longitude:-80.57090778; latitude: 43.49765251;" look-at="[gps-camera]" look-controls-enabled='false' arjs-look-controls='smoothingFactor: 0.1' ></a-link>
+       <a-link title="Birch 2" scale=".3 .3 .3" class="hotspot birch2" link="image:./assets/ant.png"  gps-entity-place="longitude:-80.57087151; latitude: 43.49755989;"  look-controls-enabled='false' arjs-look-controls='smoothingFactor: 0.1' ></a-link>
+       <a-link title="Birch 1" scale=".3 .3 .3" class="hotspot birch1" link="backgroundColor:#669933;border-color:#303030;" gps-entity-place="longitude:-80.57090778; latitude: 43.49765251;"  look-controls-enabled='false' arjs-look-controls='smoothingFactor: 0.1' ></a-link>
 
-        <a-camera gps-camera rotation-reader alert="true" rotation="0 280 -45" gpsMinDistance="6" gpsTimeInterval="5000"  ></a-camera>
+        <a-camera gps-camera rotation-reader alert="true" rotation="0 280 0"  gpsTimeInterval="1500"  ></a-camera>
     </a-scene>
 
 <div id="Dist" class="dist-overlay">distance</div>
