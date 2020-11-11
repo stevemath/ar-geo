@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="css/pagestyles.css">
     <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
 
-    <script src="https://raw.githack.com/jeromeetienne/AR.js/master/aframe/build/aframe-ar.min.js"></script>
     <script src="https://raw.githack.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
     <script src="  https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
   
@@ -38,12 +37,15 @@
        </a-link>
        <a-link id="tree1" title="Birch 1" scale=".3 .3 .3" class="hotspot birch1" link="backgroundColor:#669933;border-color:#303030;" gps-entity-place="longitude:-80.57090778; latitude: 43.49765251;" look-at="[gps-camera]" ></a-link>
  <a-image src="#img2" position="2 1 2" look-at="[gps-camera]"></a-image>
-        <a-camera  rotation-reader alert="true"   gpsTimeInterval="1500" look-controls-enabled='true' arjs-look-controls='smoothingFactor: 0.1'   gps-camera gpsMinDistance='3'  ></a-camera>
+        <a-camera  rotation-reader alert="true"   gpsTimeInterval="3500" look-controls-enabled='true' arjs-look-controls='smoothingFactor: 0.05'   gps-camera gpsMinDistance='8'  ></a-camera>
     </a-scene>
 
 <div id="Dist" class="dist-overlay">distance</div>
 <div id="Dist2" class="dist-overlay  lower">distance</div>
     <script>
+
+        // <script src="https://raw.githack.com/jeromeetienne/AR.js/master/aframe/build/aframe-ar.min.js">
+   
         //43.497710 -80.570740
 //        <a-entity gltf-model="./assets/magnemite/scene.gltf" rotation="0 180 0" scale="0.15 0.15 0.15" gps-entity-place="longitude: -80.570504; latitude: 43.497265;" animation-mixer/>
 //  <a-gltf-model id="locale2" src="#model1" rotation="0 180 0" scale="0.015 0.015 0.015"  animation-mixer="clip: DancingTwerk" gps-entity-place="longitude: -80.570667; latitude: 43.497601;" scale="2.5 2.5 2.5"  class="hotspot snaggle" look-controls-enabled='false' arjs-look-controls='smoothingFactor: 0.1'  look-at="[gps-camera]"></a-gltf-model>
