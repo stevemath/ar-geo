@@ -14,7 +14,7 @@
     <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
 
     <script>
-       // THREEx.ArToolkitContext.baseURL = 'https://raw.githack.com/jeromeetienne/ar.js/master/three.js/'
+        THREEx.ArToolkitContext.baseURL = 'https://raw.githack.com/jeromeetienne/ar.js/master/three.js/'
     </script>
 </head>
 
@@ -33,9 +33,11 @@
 
 
 
-       <a-link title="Birch 2" scale=".3 .3 .3" class="hotspot birch2" link="image:./assets/ant.png;"  gps-entity-place="longitude:-80.57087151; latitude: 43.49755989;" look-at="[gps-camera]" ></a-link>
-       <a-link title="Birch 1" scale=".3 .3 .3" class="hotspot birch1" link="backgroundColor:#669933;border-color:#303030;" gps-entity-place="longitude:-80.57090778; latitude: 43.49765251;" look-at="[gps-camera]" ></a-link>
-
+       <a-link id="tree2" title="Birch 2" scale=".3 .3 .3" class="hotspot birch2" link="backgroundColor:#3366dd;border-color:#303030;"  gps-entity-place="longitude:-80.57087151; latitude: 43.49755989;" look-at="[gps-camera]" >
+          
+       </a-link>
+       <a-link id="tree1" title="Birch 1" scale=".3 .3 .3" class="hotspot birch1" link="backgroundColor:#669933;border-color:#303030;" gps-entity-place="longitude:-80.57090778; latitude: 43.49765251;" look-at="[gps-camera]" ></a-link>
+ <a-image src="#img2" position="2 1 2" look-at="[gps-camera]"></a-image>
         <a-camera  rotation-reader alert="true"   gpsTimeInterval="1500" look-controls-enabled='true'  gps-camera gpsMinDistance='3'  ></a-camera>
     </a-scene>
 
