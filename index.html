@@ -38,7 +38,7 @@
        </a-link>
        <a-link id="tree1" title="Birch 1" scale=".3 .3 .3" class="hotspot birch1" link="backgroundColor:#669933;border-color:#303030;" gps-entity-place="longitude:-80.57090778; latitude: 43.49765251;" look-at="[gps-camera]" ></a-link>
  <a-image src="#img2" position="2 1 2" look-at="[gps-camera]"></a-image>
-        <a-camera  rotation-reader alert="true"   gpsTimeInterval="1500" look-controls-enabled='true'  gps-camera gpsMinDistance='3'  ></a-camera>
+        <a-camera  rotation-reader alert="true"   gpsTimeInterval="1500" look-controls-enabled='false' arjs-look-controls='smoothingFactor: 0.1'   gps-camera gpsMinDistance='3'  ></a-camera>
     </a-scene>
 
 <div id="Dist" class="dist-overlay">distance</div>
