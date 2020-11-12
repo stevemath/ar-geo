@@ -28,7 +28,7 @@
           var el = this.el;  
         // console.log(el)
          el.addEventListener('mousedown', function (e) {
-        
+          window.navigator.vibrate(150,50,150);
           alert("click");
            console.log("click");
            console.log(el)
