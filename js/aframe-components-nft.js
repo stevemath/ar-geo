@@ -29,7 +29,7 @@
         // console.log(el)
          el.addEventListener('mousedown', function (e) {
         
-        //   alert("click");
+          alert("click");
            console.log("click");
            console.log(el)
      console.log(e)
@@ -38,7 +38,8 @@
         console.log(link.getAttribute("position"))
         console.log(el.getAttribute("position"))
       //  console.log(e.getAttribute("position"))
-    if(distance1 < 15){
+      console.log(distance1)
+    if(distance1 < 20){
         window.navigator.vibrate(150,50,150);
     }
           });
