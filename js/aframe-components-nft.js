@@ -38,6 +38,9 @@
         console.log(link.getAttribute("position"))
         console.log(el.getAttribute("position"))
       //  console.log(e.getAttribute("position"))
+    if(distance1 < 15){
+        window.navigator.vibrate(150,50,150);
+    }
           });
      
          
