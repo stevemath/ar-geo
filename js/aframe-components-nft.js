@@ -21,6 +21,28 @@
       
     
 
+      AFRAME.registerComponent('hotspot-click', {
+   
+        init: function () {
+         // var data = this.data;
+          var el = this.el;  
+        // console.log(el)
+         el.addEventListener('mousedown', function (e) {
+        
+        //   alert("click");
+           console.log("click");
+           console.log(el)
+     console.log(e)
+     console.log(e.target.id);
+        var link =   document.getElementById(e.target.id);
+        console.log(link.getAttribute("position"))
+        console.log(el.getAttribute("position"))
+      //  console.log(e.getAttribute("position"))
+          });
+     
+         
+        }
+      });
 
       AFRAME.registerComponent('open-popup', {
         init: function () {

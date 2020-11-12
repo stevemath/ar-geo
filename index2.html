@@ -6,25 +6,22 @@
     <title>GeoAR.js demo</title>
     <link rel="stylesheet" href="css/pagestyles.css">
     <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
-  <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
-  
-    <script src="https://raw.githack.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
-  
-    <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
-
     
+
+
+<script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
+
+<script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
+  
 <script src='js/cursor.js' defer ></script>
-<script src='js/aframe-components-nft.js'  ></script>
 
     <script>
-       THREEx.ArToolkitContext.baseURL = 'https://raw.githack.com/jeromeetienne/ar.js/master/three.js/'
+     //  THREEx.ArToolkitContext.baseURL = 'https://raw.githack.com/jeromeetienne/ar.js/master/three.js/'
     </script>
 </head>
 
 <body style='margin: 0; overflow: hidden;'>
-    <a-scene
-        vr-mode-ui="enabled: false"
-        arjs='sourceType: webcam; debugUIEnabled: false;'>
+    <a-scene    arjs='sourceType: webcam; debugUIEnabled: false;'     vr-mode-ui="enabled: false" >
         <a-assets id="assetsPanel" timeout="35000">
 
             <img id="img1"  src="assets/raccoon.png"   />
@@ -33,14 +30,10 @@
            </a-assets>
 
 
-
-
-       <a-link id="tree2" title="Birch 2" scale=".3 .3 .3" class="hotspot birch2 clickable" link="backgroundColor:#3366dd;border-color:#303030;"  gps-entity-place="longitude:-80.57087151; latitude: 43.49755989;" look-at="[gps-camera]" hotspot-click></a-clink>
-       <a-link id="tree1" title="Birch 1" scale=".3 .3 .3" on="" bubbles="false" defaultPrevented="true" class="hotspot birch1 clickable" link="href:null;on:null;backgroundColor:#669933;border-color:#303030;" gps-entity-place="longitude:-80.57090778; latitude: 43.49765251;" look-at="[gps-camera]" hotspot-click ></a-link>
- <a-image id="ant1" src="#img2"  look-at="[gps-camera]" position="-3 0 3" class="clickable" hotspot-click></a-image>
+ <a-image id="ant1" src="#img2" position="-1.0 1 -1.5"  class="clickable" showoverlay></a-image>
  <a-entity  id="cursor" cursor="rayOrigin: mouse" raycaster="objects: .clickable;"></a-entity>
        
-        <a-camera gps-camera    alert="true"   look-controls-enabled='true'   gpsTimeInterval="1500"  ></a-camera>
+        <a-camera gps-camera ></a-camera>
     </a-scene>
 
 <div id="Dist" class="dist-overlay">distance</div>
@@ -70,35 +63,29 @@
 
 
 
-setInterval(()=>{
-    try{
-        var hotspot = document.querySelector('.birch1');
-        var hotspot2 = document.querySelector('.birch2');
-console.log(hotspot)
-//console.log(hotspot.position)
-
-    var distanceMsg = hotspot.getAttribute('distanceMsg');
-  //  var distance = hotspot.getAttribute('distance');
-    console.log(distanceMsg)
-   // if(distance < 15){
-   //     window.navigator.vibrate(150,50,150);
-    //}
-    var distanceMsg2 = hotspot2.getAttribute('distanceMsg');
-   // console.log(distanceMsg);
-    var distTxt = document.getElementById("Dist")
-    var distTxt2 = document.getElementById("Dist2")
-    distTxt.innerHTML = distanceMsg;
-    distTxt2.innerHTML = distanceMsg2;
-
-
-//alert(distanceMsg);
-    }catch(err){
-        console.log(err);
-    }
-},7000)
 
 
 })()
+
+
+
+AFRAME.registerComponent('showoverlay', {
+   
+   init: function () {
+    // var data = this.data;
+    console.log("init")
+     var el = this.el;  
+    console.log(el)
+    el.addEventListener('mousedown', function (e) {
+      console.log("click");
+console.log(e)
+console.log(e.target.id);
+      
+     });
+
+    
+   }
+ });
 
     </script>
 </body>
