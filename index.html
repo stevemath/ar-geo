@@ -17,6 +17,7 @@
 <script src='js/aframe-components-nft.js'  ></script>
 
     <script>
+        // clickable is dependent on this
       THREEx.ArToolkitContext.baseURL = 'https://raw.githack.com/jeromeetienne/ar.js/master/three.js/'
     </script>
 </head>
@@ -42,7 +43,7 @@
 
  <a-entity  id="cursor" cursor="rayOrigin: mouse" raycaster="objects: .clickable;"></a-entity>
        
-        <a-camera gps-camera   rotation-reader   gpsMinDistance="1" gpsTimeInterval="750"  ></a-camera>
+        <a-camera gps-camera  gpsMinDistance="0.5" gpsTimeInterval="300"  ></a-camera>
     </a-scene>
 
 <div id="Dist" class="dist-overlay">distance</div>
@@ -76,12 +77,12 @@ setInterval(()=>{
     try{
         var hotspot = document.querySelector('.birch1');
         var hotspot2 = document.querySelector('.birch2');
-console.log(hotspot)
+//console.log(hotspot)
 //console.log(hotspot.position)
 
     var distanceMsg = hotspot.getAttribute('distanceMsg');
  distance1 = hotspot.getAttribute('distance');
-    console.log(distanceMsg)
+   // console.log(distanceMsg)
    // if(distance < 15){
    //     window.navigator.vibrate(150,50,150);
     //}
@@ -97,7 +98,7 @@ console.log(hotspot)
     }catch(err){
         console.log(err);
     }
-},7000)
+},2000)
 
 
 })()
