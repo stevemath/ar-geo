@@ -51,6 +51,8 @@
         }
       });
 
+      
+
       AFRAME.registerComponent('open-popup', {
         init: function () {
          

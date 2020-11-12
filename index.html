@@ -43,7 +43,7 @@
 
  <a-entity  id="cursor" cursor="rayOrigin: mouse" raycaster="objects: .clickable;"></a-entity>
        
-        <a-camera gps-camera rotation-reader gpsMinDistance="0.5" gpsTimeInterval="250"  ></a-camera>
+        <a-camera id="camera" gps-camera rotation-reader gpsMinDistance="0.5" gpsTimeInterval="250"  ></a-camera>
     </a-scene>
 
 <div id="Dist" class="dist-overlay">distance</div>
@@ -71,9 +71,12 @@ var distance1;
 ]
 
 
+var camera = document.getElementById("camera");
 
+camera.addEventListener("gps-camera-update-position", (e)=>{
 
-setInterval(()=>{
+    console.log("cam pos update")
+    console.log(e)
     try{
         var hotspot = document.querySelector('.birch1');
         var hotspot2 = document.querySelector('.birch2');
@@ -98,7 +101,66 @@ setInterval(()=>{
     }catch(err){
         console.log(err);
     }
-},2000)
+})
+
+camera.addEventListener("gps-camera-origin-coord-set", (e)=>{
+
+    console.log("cam pos origin loaded")
+    console.log(e)
+    try{
+        var hotspot = document.querySelector('.birch1');
+        var hotspot2 = document.querySelector('.birch2');
+//console.log(hotspot)
+//console.log(hotspot.position)
+
+    var distanceMsg = hotspot.getAttribute('distanceMsg');
+ distance1 = hotspot.getAttribute('distance');
+   // console.log(distanceMsg)
+   // if(distance < 15){
+   //     window.navigator.vibrate(150,50,150);
+    //}
+    var distanceMsg2 = hotspot2.getAttribute('distanceMsg');
+   // console.log(distanceMsg);
+    var distTxt = document.getElementById("Dist")
+    var distTxt2 = document.getElementById("Dist2")
+    distTxt.innerHTML = distanceMsg;
+    distTxt2.innerHTML = distanceMsg2;
+
+
+//alert(distanceMsg);
+    }catch(err){
+        console.log(err);
+    }
+})
+
+
+
+// setInterval(()=>{
+//     try{
+//         var hotspot = document.querySelector('.birch1');
+//         var hotspot2 = document.querySelector('.birch2');
+// //console.log(hotspot)
+// //console.log(hotspot.position)
+
+//     var distanceMsg = hotspot.getAttribute('distanceMsg');
+//  distance1 = hotspot.getAttribute('distance');
+//    // console.log(distanceMsg)
+//    // if(distance < 15){
+//    //     window.navigator.vibrate(150,50,150);
+//     //}
+//     var distanceMsg2 = hotspot2.getAttribute('distanceMsg');
+//    // console.log(distanceMsg);
+//     var distTxt = document.getElementById("Dist")
+//     var distTxt2 = document.getElementById("Dist2")
+//     distTxt.innerHTML = distanceMsg;
+//     distTxt2.innerHTML = distanceMsg2;
+
+
+// //alert(distanceMsg);
+//     }catch(err){
+//         console.log(err);
+//     }
+// },2000)
 
 
 })()
