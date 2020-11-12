@@ -36,14 +36,14 @@
 
 
 
-       <a-circle id="tree2" title="Birch 2" scale=".8 .8 .8" class="hotspot birch2 clickable"  gps-entity-place="longitude:-80.57087151; latitude: 43.49755989;"  hotspot-click></a-circle>
+       <a-circle id="tree2" title="Birch 2" scale=".8 .8 .8" class="hotspot birch2 clickable"  gps-entity-place="longitude:-80.57087151; latitude: 43.49755989;" look-at="[gps-camera]" hotspot-click></a-circle>
        <a-circle id="tree1" title="Birch 1" scale=".8 .8 .8"   class="hotspot birch1 clickable"  gps-entity-place="longitude:-80.57090778; latitude: 43.49765251;" look-at="[gps-camera]" hotspot-click >
             <a-image id="ant1" src="#img2" position="0 0 .3" scale="1.5 1.5 1.5"  ></a-image>
        </a-circle>
 
  <a-entity  id="cursor" cursor="rayOrigin: mouse" raycaster="objects: .clickable;"></a-entity>
        
-        <a-camera rotation-reader  gps-camera rotation-reader gpsMinDistance="0.5" gpsTimeInterval="250"  ></a-camera>
+        <a-camera id="cam" rotation-reader  gps-camera rotation-reader gpsMinDistance="0.5" gpsTimeInterval="250"  ></a-camera>
     </a-scene>
 
 <div id="Dist" class="dist-overlay">distance</div>
@@ -70,9 +70,59 @@ var distance1;
 
 ]
 
+var assets = document.getElementById("assetsPanel");
+      console.log("assets:", assets)
+      if(assets !== null)   {                            
+      assets.addEventListener("loaded", (e)=>{
+      console.log("assets loaded");
+      setTimeout(()=>{
+        // initCursor()
+         setCamEvents()
+      },100)
+      })
+    }else{
+      setTimeout(()=>{
+        // initCursor()
+      },100)
+     
+    }
 
-var camera = document.getElementById("cam");
 
+
+// setInterval(()=>{
+//     try{
+//         var hotspot = document.querySelector('.birch1');
+//         var hotspot2 = document.querySelector('.birch2');
+// //console.log(hotspot)
+// //console.log(hotspot.position)
+
+//     var distanceMsg = hotspot.getAttribute('distanceMsg');
+//  distance1 = hotspot.getAttribute('distance');
+//    // console.log(distanceMsg)
+//    // if(distance < 15){
+//    //     window.navigator.vibrate(150,50,150);
+//     //}
+//     var distanceMsg2 = hotspot2.getAttribute('distanceMsg');
+//    // console.log(distanceMsg);
+//     var distTxt = document.getElementById("Dist")
+//     var distTxt2 = document.getElementById("Dist2")
+//     distTxt.innerHTML = distanceMsg;
+//     distTxt2.innerHTML = distanceMsg2;
+
+
+// //alert(distanceMsg);
+//     }catch(err){
+//         console.log(err);
+//     }
+// },2000)
+
+
+})()
+
+function setCamEvents(){
+
+    var camera = document.getElementById("cam");
+console.log(camera)
 camera.addEventListener("gps-camera-update-position", (e)=>{
 
     console.log("cam pos update")
@@ -134,36 +184,6 @@ camera.addEventListener("gps-camera-origin-coord-set", (e)=>{
 })
 
 
-
-// setInterval(()=>{
-//     try{
-//         var hotspot = document.querySelector('.birch1');
-//         var hotspot2 = document.querySelector('.birch2');
-// //console.log(hotspot)
-// //console.log(hotspot.position)
-
-//     var distanceMsg = hotspot.getAttribute('distanceMsg');
-//  distance1 = hotspot.getAttribute('distance');
-//    // console.log(distanceMsg)
-//    // if(distance < 15){
-//    //     window.navigator.vibrate(150,50,150);
-//     //}
-//     var distanceMsg2 = hotspot2.getAttribute('distanceMsg');
-//    // console.log(distanceMsg);
-//     var distTxt = document.getElementById("Dist")
-//     var distTxt2 = document.getElementById("Dist2")
-//     distTxt.innerHTML = distanceMsg;
-//     distTxt2.innerHTML = distanceMsg2;
-
-
-// //alert(distanceMsg);
-//     }catch(err){
-//         console.log(err);
-//     }
-// },2000)
-
-
-})()
-
+}
     </script>
 </body>
