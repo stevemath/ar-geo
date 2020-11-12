@@ -42,7 +42,7 @@
 
  <a-entity  id="cursor" cursor="rayOrigin: mouse" raycaster="objects: .clickable;"></a-entity>
        
-        <a-camera gps-camera  rotation-reader  alert="true"    ></a-camera>
+        <a-camera gps-camera   rotation-reader   gpsMinDistance="1" gpsTimeInterval="750"  ></a-camera>
     </a-scene>
 
 <div id="Dist" class="dist-overlay">distance</div>
