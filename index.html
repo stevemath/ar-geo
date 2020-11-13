@@ -122,7 +122,7 @@ var assets = document.getElementById("assetsPanel");
 function setCamEvents(){
 
     var camera = document.getElementById("cam");
-console.log(camera)
+console.log(camera);
 camera.addEventListener("gps-camera-update-position", (e)=>{
 
     console.log("cam pos update")
@@ -155,7 +155,8 @@ alert(distanceMsg);
 
 camera.addEventListener("gps-camera-origin-coord-set", (e)=>{
 
-    console.log("cam pos origin loaded")
+    console.log("cam pos origin loaded");
+    alert("set cam position");
     console.log(e)
     try{
         var hotspot = document.querySelector('.birch1');
