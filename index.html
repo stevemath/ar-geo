@@ -128,7 +128,7 @@ console.log(camera);
 var gpsCam = camera.el.components["gps-camera"];
 console.log(gpsCam);
 window.addEventListener("camera-init", (e)=>{
-    alert("init cam");
+   // alert("init cam");
     console.log("cam pos update")
     console.log(e)
 
@@ -136,7 +136,7 @@ window.addEventListener("camera-init", (e)=>{
 
 
 window.addEventListener("gps-camera-update-position", (e)=>{
-    alert("update cam position");
+  //  alert("update cam position");
     console.log("cam pos update")
     console.log(e)
     try{
@@ -168,7 +168,7 @@ alert(distanceMsg);
 window.addEventListener("gps-camera-origin-coord-set", (e)=>{
 
     console.log("cam pos origin loaded");
-    alert("set cam position");
+   // alert("set cam position");
     console.log(e)
     try{
         var hotspot = document.querySelector('.birch1');
