@@ -40,6 +40,9 @@
       
         console.log(link.getAttribute("position"))
         console.log(el.getAttribute("position"))
+
+
+ 
       //  console.log(e.getAttribute("position"))
       console.log(distance1)
     if(distance1 < 20){
