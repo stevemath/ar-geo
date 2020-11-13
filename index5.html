@@ -41,7 +41,7 @@
        <a-circle id="tree1" title="Birch 1" scale=".8 .8 .8"   class="hotspot birch1 clickable" position="0 1 0" gps-projected-entity-place="longitude:-80.57090778; latitude: 43.49765251;" look-at="[gps-projected-camera]" hotspot-click >
             <a-image id="ant1" src="#img2" position="0 0 .3" scale="1.5 1.5 1.5"  ></a-image>
        </a-circle>
-       <a-circle id="marker1"  scale=".1 .1 .1" position="1 1 1" class="hotspot  clickable" material="color:#5588dd" look-at="[gps-camera]" hotspot-click></a-circle>
+       <a-circle id="marker1"  scale=".1 .1 .1" position="1 1 1" class="hotspot  clickable" material="color:#5588dd" look-at="[gps-projected-camera]" hotspot-click></a-circle>
     
  <a-entity  id="cursor" cursor="rayOrigin: mouse" raycaster="objects: .clickable;"></a-entity>
        
@@ -89,7 +89,7 @@ var assets = document.getElementById("assetsPanel");
      
     }
 
-
+  
 
 // setInterval(()=>{
 //     try{
@@ -126,7 +126,7 @@ function setCamEvents(){
     var camera = document.getElementById("cam").object3D;
 console.log(camera);
 
-var gpsCam = camera.el.components["gps-camera"];
+var gpsCam = camera.el.components["gps-projected-camera"];
 console.log(gpsCam);
 window.addEventListener("camera-init", (e)=>{
    // alert("init cam");
@@ -148,10 +148,12 @@ window.addEventListener("gps-camera-update-position", (e)=>{
 
     var distanceMsg = hotspot.getAttribute('distanceMsg');
  distance1 = hotspot.getAttribute('distance');
-
+ console.log(gpsCam)
+var newPos = gpsCam.latLonToWorld(43.49765251,-80.57090778)
 
  var pos = hotspot.getAttribute("position");
         console.log("pos", pos)
+        console.log("newpos",newPos)
  var marker1 = document.getElementById("marker1").object3D;
  marker1.position.x = pos.x;
  marker1.position.z = pos.z;
