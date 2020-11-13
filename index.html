@@ -19,7 +19,7 @@
 
     <script>
         // clickable is dependent on this
-     // THREEx.ArToolkitContext.baseURL = 'https://raw.githack.com/jeromeetienne/ar.js/master/three.js/'
+      THREEx.ArToolkitContext.baseURL = 'https://raw.githack.com/jeromeetienne/ar.js/master/three.js/'
     </script>
 </head>
 
@@ -44,7 +44,7 @@
 
  <a-entity  id="cursor" cursor="rayOrigin: mouse" raycaster="objects: .clickable;"></a-entity>
        
-        <a-camera id="cam" rotation-reader  gps-camera="gpsMinDistance:0.5; gpsTimeInterval:250;" rotation-reader    ></a-camera>
+        <a-camera id="cam" rotation-reader  gps-camera="gpsMinDistance:5; gpsTimeInterval:250;" rotation-reader    ></a-camera>
     </a-scene>
 
 <div id="Dist" class="dist-overlay">distance</div>
