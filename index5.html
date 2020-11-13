@@ -37,15 +37,15 @@
 
 
 
-       <a-circle id="tree2" title="Birch 2" scale=".8 .8 .8" class="hotspot birch2 clickable"  gps-entity-place="longitude:-80.57087151; latitude: 43.49755989;" look-at="[gps-camera]" hotspot-click></a-circle>
-       <a-circle id="tree1" title="Birch 1" scale=".8 .8 .8"   class="hotspot birch1 clickable"  gps-entity-place="longitude:-80.57090778; latitude: 43.49765251;" look-at="[gps-camera]" hotspot-click >
+       <a-circle id="tree2" title="Birch 2" scale=".8 .8 .8" class="hotspot birch2 clickable" position="0 1 0" gps-projected-entity-place="longitude:-80.57087151; latitude: 43.49755989;" look-at="[gps-projected-camera]" hotspot-click></a-circle>
+       <a-circle id="tree1" title="Birch 1" scale=".8 .8 .8"   class="hotspot birch1 clickable" position="0 1 0" gps-projected-entity-place="longitude:-80.57090778; latitude: 43.49765251;" look-at="[gps-projected-camera]" hotspot-click >
             <a-image id="ant1" src="#img2" position="0 0 .3" scale="1.5 1.5 1.5"  ></a-image>
        </a-circle>
        <a-circle id="marker1"  scale=".1 .1 .1" position="1 1 1" class="hotspot  clickable" material="color:#5588dd" look-at="[gps-camera]" hotspot-click></a-circle>
     
  <a-entity  id="cursor" cursor="rayOrigin: mouse" raycaster="objects: .clickable;"></a-entity>
        
-        <a-camera id="cam" rotation-reader  gps-camera="gpsMinDistance:0.5; gpsTimeInterval:250;"    ></a-camera>
+        <a-camera id="cam" rotation-reader  gps-projected-camera="gpsMinDistance:0.5; gpsTimeInterval:250;"    ></a-camera>
     </a-scene>
 
 <div id="Dist" class="dist-overlay">distance</div>
