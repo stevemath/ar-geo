@@ -1,5 +1,4 @@
-/* If you're feeling fancy you can add interactivity 
-    to your site with Javascript */
+var rReaderPos = "-"
 
     AFRAME.registerComponent('navigate-on-click', {
         schema: {
@@ -30,6 +29,8 @@
       
           return function () {
             this.el.object3D.getWorldPosition(position);
+            console.log( this.el.object3D.getWorldPosition(position))
+            rReaderPos =  this.el.object3D.getWorldPosition(position)
             this.el.object3D.getWorldQuaternion(quaternion);
             // position and rotation now contain vector and quaternion in world space.
           };

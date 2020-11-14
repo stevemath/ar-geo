@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>GeoAR.js demo</title>
+    <link rel="stylesheet" href="css/pagestyles.css">
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+  <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+  
+    <script src="https://raw.githack.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
+  
+    <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
+
+    
+<script src='js/cursor.js' defer ></script>
+<script src='js/gesture-detector.js'></script>
+<script src='js/gesture-handler.js'></script>
+<script src='js/aframe-components-nft.js'  ></script>
+
+    <script>
+        // clickable is dependent on this
+      THREEx.ArToolkitContext.baseURL = 'https://raw.githack.com/jeromeetienne/ar.js/master/three.js/'
+    </script>
+</head>
+
+<body style='margin: 0; overflow: hidden;'>
+    <a-scene
+gesture-detector
+    vr-mode-ui="enabled: false"
+        arjs='sourceType: webcam; debugUIEnabled: false;'>
+        <a-assets id="assetsPanel" timeout="35000">
+
+            <img id="img1"  src="assets/raccoon.png"   />
+            <img id="img2"  src="assets/ant.png"   />
+            
+           </a-assets>
+
+
+
+
+       <a-circle id="tree2" title="Birch 2" scale=".8 .8 .8" class="hotspot birch2 clickable"  gps-entity-place="longitude:-80.57087151; latitude: 43.49755989;" look-at="[gps-camera]" hotspot-click></a-circle>
+       <a-circle id="tree1" title="Birch 1" scale=".8 .8 .8"   class="hotspot birch1 clickable"  gps-entity-place="longitude:-80.57090778; latitude: 43.49765251;" look-at="[gps-camera]" hotspot-click >
+            <a-image id="ant1" src="#img2" position="0 0 .3" scale="1.5 1.5 1.5"  ></a-image>
+       </a-circle>
+
+
+
+ <a-entity  id="cursor" cursor="rayOrigin: mouse" raycaster="objects: .clickable;"></a-entity>
+       
+        <a-camera id="cam" gps-camera rotation-reader gpsMinDistance="2" gpsTimeInterval="250" look-controls="false" ></a-camera>
+    </a-scene>
+<div class="dist-overlay">
+<div id="Origin" >origin:</div>
+<div id="Rotation Reader" >reader:</div>
+<div id="Dist" >distance</div>
+<div id="Dist2" >distance</div>
+</div>  
+    <script>
+var distance1;
+        // <script src="https://raw.githack.com/jeromeetienne/AR.js/master/aframe/build/aframe-ar.min.js">
+   
+        //43.497710 -80.570740
+//        <a-entity gltf-model="./assets/magnemite/scene.gltf" rotation="0 180 0" scale="0.15 0.15 0.15" gps-entity-place="longitude: -80.570504; latitude: 43.497265;" animation-mixer/>
+//  <a-gltf-model id="locale2" src="#model1" rotation="0 180 0" scale="0.015 0.015 0.015"  animation-mixer="clip: DancingTwerk" gps-entity-place="longitude: -80.570667; latitude: 43.497601;" scale="2.5 2.5 2.5"  class="hotspot snaggle" look-controls-enabled='false' arjs-look-controls='smoothingFactor: 0.1'  look-at="[gps-camera]"></a-gltf-model>
+ //  <a-image id="locale3" src="#img1" rotation="0 180 0"  scale="2.5 2.5 2.5" gps-entity-place="longitude:-80.570665; latitude: 43.497871;" class="hotspot glare" look-controls-enabled='false' arjs-look-controls='smoothingFactor: 0.1'  look-at="[gps-camera]"></a-image>
+  //<a-asset-item id="model1"  src="assets/dancer5.glb" ></a-asset-item>      
+//   <a-image id="locale4" src="#img1" rotation="0 180 0"  scale="1.5 1.5 1.5" gps-entity-place="longitude:-80.57090778; latitude: 43.49765251;" class="hotspot birch1" look-controls-enabled='false' arjs-look-controls='smoothingFactor: 0.05'  look-at="[gps-camera]"></a-image>
+//         <a-image id="locale5" src="#img2" rotation="0 180 0"  scale="1.5 1.5 1.5" gps-entity-place="longitude:-80.57087151; latitude: 43.49755989;" class="hotspot birch2" look-controls-enabled='false' arjs-look-controls='smoothingFactor: 0.1'  look-at="[gps-camera]"></a-image>
+  // gpsMinDistance="6" gpsTimeInterval="5000"  
+
+(function(){
+    var locales =[
+{id:1,label:"Home", lat:"43.497694", long:"-80.570723", desc:"707 Jacob Lane", link:""},
+{id:2,label:"Snaggletooth", lat:"43.497601", long:"-80.570667", desc:"709 Jacob Lane", link:""},
+{id:3,label:"Hey Koolaid", lat:"43.497265", long:"-80.570504", desc:"627 Osprey", link:""},
+{id:4,label:"Glaremeisters", lat:"43.497871", long:"-80.570665", desc:"703 Jacob Lane", link:""},
+
+]
+
+
+var assets = document.getElementById("assetsPanel");
+      console.log("assets:", assets)
+      if(assets !== null)   {                            
+      assets.addEventListener("loaded", (e)=>{
+      console.log("assets loaded");
+      setTimeout(()=>{
+        // initCursor()
+         setCamEvents()
+      },100)
+      })
+    }else{
+      setTimeout(()=>{
+        // initCursor()
+      },100)
+     
+    }
+
+// setInterval(()=>{
+//     try{
+//         var hotspot = document.querySelector('.birch1');
+//         var hotspot2 = document.querySelector('.birch2');
+// //console.log(hotspot)
+// //console.log(hotspot.position)
+
+//     var distanceMsg = hotspot.getAttribute('distanceMsg');
+//  distance1 = hotspot.getAttribute('distance');
+//    // console.log(distanceMsg)
+//    // if(distance < 15){
+//    //     window.navigator.vibrate(150,50,150);
+//     //}
+//     var distanceMsg2 = hotspot2.getAttribute('distanceMsg');
+//    // console.log(distanceMsg);
+//     var distTxt = document.getElementById("Dist")
+//     var distTxt2 = document.getElementById("Dist2")
+//     distTxt.innerHTML = distanceMsg;
+//     distTxt2.innerHTML = distanceMsg2;
+
+
+// //alert(distanceMsg);
+//     }catch(err){
+//         console.log(err);
+//     }
+// },2000)
+
+
+})()
+
+
+
+
+function setCamEvents(){
+
+var camera = document.getElementById("cam").object3D;
+console.log(camera);
+
+var gpsCam = camera.el.components["gps-projected-camera"];
+console.log(gpsCam);
+window.addEventListener("camera-init", (e)=>{
+// alert("init cam");
+console.log("cam pos update")
+console.log(e)
+
+})
+
+
+window.addEventListener("gps-camera-update-position", (e)=>{
+//  alert("update cam position");
+console.log("cam pos update")
+console.log(e)
+try{
+    var hotspot = document.querySelector('.birch1');
+    var hotspot2 = document.querySelector('.birch2');
+//console.log(hotspot)
+//console.log(hotspot.position)
+
+var distanceMsg = hotspot.getAttribute('distanceMsg');
+distance1 = hotspot.getAttribute('distance');
+console.log(gpsCam)
+var newPos = gpsCam.latLonToWorld(43.49765251,-80.57090778)
+
+var pos = hotspot.getAttribute("position");
+    console.log("pos", pos)
+    console.log("newpos",newPos)
+var marker1 = document.getElementById("marker1").object3D;
+marker1.position.x = pos.x;
+marker1.position.z = pos.z;
+console.log("marker", marker1)
+
+var camPos = gpsCam.currentCoords.latitude + " | " + gpsCam.longitude;
+// console.log(distanceMsg)
+// if(distance < 15){
+//     window.navigator.vibrate(150,50,150);
+//}
+var distanceMsg2 = hotspot2.getAttribute('distanceMsg');
+// console.log(distanceMsg);
+var originTxt = document.getElementById("Origin")
+var distTxt = document.getElementById("Dist")
+var distTxt2 = document.getElementById("Dist2")
+originTxt.innerHTML = distanceMsg;
+distTxt.innerHTML = distanceMsg;
+distTxt2.innerHTML = distanceMsg2;
+
+
+//alert(distanceMsg);
+}catch(err){
+    console.log(err);
+}
+})
+
+window.addEventListener("gps-camera-origin-coord-set", (e)=>{
+
+console.log("cam pos origin loaded");
+// alert("set cam position");
+console.log(e)
+try{
+    var hotspot = document.querySelector('.birch1');
+    var hotspot2 = document.querySelector('.birch2');
+//console.log(hotspot)
+//console.log(hotspot.position)
+
+var distanceMsg = hotspot.getAttribute('distanceMsg');
+distance1 = hotspot.getAttribute('distance');
+// console.log(distanceMsg)
+// if(distance < 15){
+//     window.navigator.vibrate(150,50,150);
+//}
+var distanceMsg2 = hotspot2.getAttribute('distanceMsg');
+// console.log(distanceMsg);
+var distTxt = document.getElementById("Dist")
+var distTxt2 = document.getElementById("Dist2")
+distTxt.innerHTML = distanceMsg;
+distTxt2.innerHTML = distanceMsg2;
+
+
+//alert(distanceMsg);
+}catch(err){
+    console.log(err);
+}
+})
+
+
+}
+
+
+    </script>
+</body>
