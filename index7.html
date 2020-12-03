@@ -56,7 +56,6 @@ gesture-detector
            
              <a-asset-item id="forest1"  src="assets/forest2/source/pine.glb" ></a-asset-item>
             <a-asset-item id="spruce12m"  src="assets/forest5/spruce16.gltf" ></a-asset-item>
-            <a-asset-item id="grass1"  src="assets/grass/grass2.gltf" ></a-asset-item>
             <a-asset-item id="forest2"  src="assets/forest2/source/pine.glb" ></a-asset-item>
             <a-asset-item id="raccoon"  src="assets/raccoon-animation/scene.gltf" ></a-asset-item>
             <a-asset-item id="sprucemtl" src="assets/forest4/spruce_12m.mtl"></a-asset-item>
@@ -91,8 +90,7 @@ gesture-detector
             <a-image id="ant1" src="#img2" position="0 0 .3" scale="1.5 1.5 1.5"  ></a-image>
        </a-circle>
          <a-gltf-model id="bkgrd"  gltf-model="#forest1"  position="0 -.3 0" scale=".5 .5 .5"  visible="true" ></a-gltf-model>
-         <a-gltf-model id="grass"  gltf-model="#grass1"  scale=".0005 .0005 .0005" position="0 -.20 0"   visible="true" ></a-gltf-model>
-         <a-gltf-model id="spruce1"  gltf-model="#spruce12m"  scale=".3 .3 .3" position="-1.5 0 -2.5"  rotation="0 0 0" visible="true" ></a-gltf-model>
+           <a-gltf-model id="spruce1"  gltf-model="#spruce12m"  scale=".3 .3 .3" position="-1.5 0 -2.5"  rotation="0 0 0" visible="true" ></a-gltf-model>
          <a-gltf-model id="raccoon1" visible="true"  gltf-model="#raccoon"  scale=".01 .01 .01" position="-3.6 -.15 -3"  rotation="0 0 0" class="hotspot raccoon clickable" hotspot-click >
            <a-entity position="55 62.5 44" rotation="0 90 0" scale="1 1 1">
             <a-camera id="cam2" zoom=".4" fov="95"  active="false"  rotation="0 0 0"   ></a-camera>
@@ -145,6 +143,10 @@ gesture-detector
 </div>  
     <script>
 var distance1;
+
+//  <a-asset-item id="grass1"  src="assets/grass/grass2.gltf" ></a-asset-item>
+           //  <a-gltf-model id="grass"  gltf-model="#grass1"  scale=".0005 .0005 .0005" position="0 -.20 0"   visible="true" ></a-gltf-model>
+      
         // <script src="https://raw.githack.com/jeromeetienne/AR.js/master/aframe/build/aframe-ar.min.js">
    
         //43.497710 -80.570740
