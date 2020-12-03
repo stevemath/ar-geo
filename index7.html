@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="css/pagestyles.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Covered+By+Your+Grace&family=Lato&display=swap" rel="stylesheet">
-<script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+<script src="https://aframe.io/releases/1.1.0/aframe.min.js"></script>
     <script src="https://rawgit.com/urish/aframe-camera-events/master/index.js"></script>
     <script src="https://rawgit.com/protyze/aframe-curve-component/master/dist/aframe-curve-component.min.js"></script>
     <script src="https://rawgit.com/protyze/aframe-alongpath-component/master/dist/aframe-alongpath-component.min.js"></script>
@@ -102,7 +102,7 @@ gesture-detector
             <a-image  src="#iconInfo" position="0 0 .3" scale="1.5 1.5 1.5"  ></a-image>
        </a-circle>
      
- <a-entity  id="cursor" cursor="rayOrigin: mouse" raycaster="objects: .clickable;"></a-entity>
+ <a-entity  id="cursor" cursor="rayOrigin: mouse;fuse:true;" raycaster="objects: .clickable;"></a-entity>
  <a-entity light="type: ambient; color: #ffe; intensity:1;"></a-entity>
 <a-entity position="0 15 0" light="type: directional; color: #ffe; intensity:1.25;"></a-entity>
 
