@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>GeoAR.js demo</title>
+    <link rel="stylesheet" href="css/pagestyles.css">
+  
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+  
+    <script src="https://raw.githack.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
+  
+    <script>
+        // clickable is dependent on this
+     THREEx.ArToolkitContext.baseURL = 'https://raw.githack.com/jeromeetienne/ar.js/master/three.js/'
+    </script>
+
+      
+<script src='js/cursor.js' defer ></script>
+<script src='js/handleAnimations.js'  ></script>
+    <script>
+        // clickable is dependent on this
+     //THREEx.ArToolkitContext.baseURL = 'https://raw.githack.com/jeromeetienne/ar.js/master/three.js/'
+    </script>
+</head>
+
+<body style='margin: 0; overflow: hidden;'>
+    <div id="modelContainer">
+    <a-scene    embedded    >
+        <a-assets id="assetsPanel" timeout="35000">
+
+            
+            <a-asset-item id="raccoon" src="assets/raccoon-animation/scene.gltf" ></a-asset-item>
+           </a-assets>
+
+
+
+       <a-gltf-model id="model" animation-mixer="clip:Idle; clampWhenFinished:true;timeScale:0;" gltf-model="#raccoon"  scale=".05 .05 .05" material="metalness:0;" position="0 2 -5.5" rotation="0 90 0"
+     
+       ></a-gltf-model>
+      
+  
+        <a-camera id="cam" zoom=".5" fov="45"  look-controls-enabled="false"   position="0 1 0" >
+          
+
+        </a-camera>
+    </a-scene>
+</div>
+    <script>
+
+(function(){
+console.log(THREE);
+var model = document.getElementById("model");
+var xr= 0;
+var yr = 360;
+
+var modelObj = model.object3D;
+
+setTimeout(()=>{
+    var ranim = handleAnimations("model")
+    //.set("model");
+
+
+    console.log(ranim.get())
+    console.log(ranim.getAnimList())
+    ranim.setOffsets();
+    ranim.removeTracks(["CG.quaternion"])
+    
+    ranim.removeTracks(["CG.position"])
+
+   
+
+var finishSmell = ()=>{
+
+    ranim.playClip("Action_Eat", 1, false, true,null,finishEat )
+
+}
+   
+
+var finishEat = ()=>{
+
+    ranim.playClip("idle", 1, true, true,null,null )
+
+}
+
+ ranim.playClip("Idle_Smell", 1, false, true,null,finishSmell )
+
+    // setTimeout(()=>{
+
+    //     ranim.stop()
+    // }, 3000)
+    // setTimeout(()=>{
+    //     ranim.play();
+    // }, 7000)
+  
+//var clip = animations[94];
+//var tracks = clip.tracks;
+//console.log(animations[94])
+// clip.duration = 0.8;
+// tracks.map((item)=>{
+//   // item.trim(13,22)
+//  item.shift(-166.19)
+// })
+//tracks.splice(71,1)
+//tracks.splice(70,2)
+//console.log(animations[94])
+//modelObj.el.components["animation-mixer"].data.timeScale = 1;
+//model.removeAttribute("animation-mixer")
+//model.setAttribute("animation-mixer","clip:Trot_Forward; clampWhenFinished:true;timeScale: 1;loop:repeat;")
+// var elClip = modelObj.el.components["animation-mixer"].activeActions[0];
+// elClip._startTime = 7;
+// console.log(elClip)
+// var mixer = new THREE.AnimationMixer(modelObj.el.object3DMap.mesh);
+// var clip = THREE.AnimationClip.findByName( modelObj.el.object3DMap.mesh, 'Idle_Smell' ); ; //mixer.clipAction(animations[4])
+// var action = mixer.clipAction(clip)
+// console.log(clip);
+// console.log(action)
+// mixer.update(15.5);
+// action.stop();
+
+
+//console.log(mixer)
+
+},4000)
+
+model.addEventListener("animation-loop", (e)=>{
+console.log("animation looped")
+})
+model.addEventListener("animation-finished", (e)=>{
+
+    console.log(e);
+   console.log("animation complete")
+ // model.removeAttribute("animation-mixer")
+//   model.setAttribute("animation-mixer","clip:Trot_Forward; clampWhenFinished:true;timeScale: 1;loop:once;repetitions:1;")
+//   model.setAttribute("animation-mixer", "clip:*;")
+    if(e.detail.name === "animation"){
+       // console.log("anim y")
+        e.target.setAttribute("animation__y", "enabled:true;");
+        e.target.setAttribute("animation", "enabled:false")
+       
+    }else{
+     //   console.log("reset animx")
+       // e.target.removeAttribute("animation")
+       // e.target.setAttribute("animation", "enabled:true;autoplay:true");
+      //  animation-mixer="clip:Idle_Smell;repetitions:30;timeScale:1;loop:pingpong"
+      // animation-mixer="clip:Idle_Smell;timeScale:1;loop:repeat;clampWhenFinished:true;crossFadeDuration:0.5;"
+       if(xr === 0){
+           xr =360;
+       }else{
+           xr = 0;
+           if(yr === 0){
+           yr =360;
+       }else{
+           yr = 0;
+       }
+       }
+
+       var from = "from:" + xr  + " " + yr + " 0"
+        e.target.setAttribute("animation__y", "enabled:true; " + from);
+        
+    }
+});
+
+
+})()
+
+    </script>
+</body>

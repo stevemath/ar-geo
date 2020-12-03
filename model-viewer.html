@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>GeoAR.js demo</title>
+    <link rel="stylesheet" href="css/pagestyles.css">
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+      
+<script src='js/cursor.js' defer ></script>
+    <script>
+        // clickable is dependent on this
+     //THREEx.ArToolkitContext.baseURL = 'https://raw.githack.com/jeromeetienne/ar.js/master/three.js/'
+    </script>
+</head>
+
+<body style='margin: 0; overflow: hidden;'>
+    <div id="modelContainer">
+    <a-scene    embedded    >
+        <a-assets id="assetsPanel" timeout="35000">
+
+            
+            <a-asset-item id="raccoonskull" src="assets/raccoon/skull.glb" ></a-asset-item>
+           </a-assets>
+
+
+
+       <a-gltf-model id="model"  gltf-model="#raccoonskull"  scale=".04 .04 .04" material="metalness:0;" position="0 2 -5.5" rotation="0 0 0"
+       animationx="property:rotation;  to:'0 0 0';dur:16000; loop:true;autoplay:true" 
+       animation__y="property:rotation;  to:'0 360 0';dur:4000; enabled:true;" 
+       ></a-gltf-model>
+      
+  
+        <a-camera id="cam" zoom=".5" fov="45"  look-controls-enabled="false"   position="0 1 0" >
+          
+
+        </a-camera>
+    </a-scene>
+</div>
+    <script>
+
+(function(){
+
+var model = document.getElementById("model");
+var xr= 0;
+var yr = 360;
+model.addEventListener("animationcomplete", (e)=>{
+
+    //console.log(e);
+   
+    if(e.detail.name === "animation"){
+       // console.log("anim y")
+        e.target.setAttribute("animation__y", "enabled:true;");
+        e.target.setAttribute("animation", "enabled:false")
+       
+    }else{
+     //   console.log("reset animx")
+       // e.target.removeAttribute("animation")
+       // e.target.setAttribute("animation", "enabled:true;autoplay:true");
+      
+       if(xr === 0){
+           xr =360;
+       }else{
+           xr = 0;
+           if(yr === 0){
+           yr =360;
+       }else{
+           yr = 0;
+       }
+       }
+
+       var from = "from:" + xr  + " " + yr + " 0"
+        e.target.setAttribute("animation__y", "enabled:true; " + from);
+        
+    }
+});
+
+
+})()
+
+    </script>
+</body>

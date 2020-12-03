@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>GeoAR.js demo</title>
+    <link rel="stylesheet" href="css/pagestyles.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Covered+By+Your+Grace&family=Lato&display=swap" rel="stylesheet">
+<script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://rawgit.com/urish/aframe-camera-events/master/index.js"></script>
+    <script src="https://rawgit.com/protyze/aframe-curve-component/master/dist/aframe-curve-component.min.js"></script>
+    <script src="https://rawgit.com/protyze/aframe-alongpath-component/master/dist/aframe-alongpath-component.min.js"></script>
+  
+    <!--
+        <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+  
+    -->
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+  
+
+    
+    <script src="https://raw.githack.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
+  
+    <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
+
+    
+<script src='js/inflate.min.js' defer ></script>
+<script src='js/cursor.js' defer ></script>
+<script src='js/gesture-detector.js'></script>
+<script src='js/gesture-handler.js'></script>
+<script src='js/handleAnimations.js'  ></script>
+<script src='js/orbit-controls.js'  ></script>
+<script src='js/aframe-components-vr.js'  ></script>
+<script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+<script nomodule src="https://unpkg.com/@google/model-viewer/dist/model-viewer-legacy.js"></script>
+
+    <script>
+        // clickable is dependent on this
+     THREEx.ArToolkitContext.baseURL = 'https://raw.githack.com/jeromeetienne/ar.js/master/three.js/'
+    </script>
+
+<script src="https://kit.fontawesome.com/e03078b2da.js" crossorigin="anonymous"></script>
+</head>
+
+<body style='margin: 0; overflow: hidden;'>
+   
+    <a-scene
+gesture-detector
+    vr-mode-ui="enabled: true"
+        arjs='debugUIEnabled: false;'>
+        <a-assets id="assetsPanel" timeout="35000">
+
+            <img id="img1"  src="assets/raccoon.png"   />
+            <img id="img2"  src="assets/ant.png"   />
+            <img id="iconInfo"  src="assets/info.png"   />
+           
+             <a-asset-item id="forest1"  src="assets/forest2/source/pine.glb" ></a-asset-item>
+            <a-asset-item id="spruce12m"  src="assets/forest5/spruce16.gltf" ></a-asset-item>
+            <a-asset-item id="grass1"  src="assets/grass/grass2.gltf" ></a-asset-item>
+            <a-asset-item id="forest2"  src="assets/forest2/source/pine.glb" ></a-asset-item>
+            <a-asset-item id="raccoon"  src="assets/raccoon-animation/scene.gltf" ></a-asset-item>
+            <a-asset-item id="sprucemtl" src="assets/forest4/spruce_12m.mtl"></a-asset-item>
+            <a-asset-item id="book5" src="assets/book4/book_5b.glb.gltf" ></a-asset-item>
+            
+           </a-assets>
+
+
+<a-curve id="track1" closed="true" >
+            <a-curve-point position="-3.6 -.15 -3"></a-curve-point>
+            <a-curve-point  position="-1 -.15 -3"></a-curve-point>
+            <a-curve-point  position="0 -.15 -1.85"></a-curve-point>
+           
+         </a-curve>
+<a-curve id="track2" closed="true" >
+    <a-curve-point  position="0 -.15 -1.85"></a-curve-point>
+           
+            <a-curve-point   position="2 -.15 -2"></a-curve-point>
+            <a-curve-point position="3.75 -.15 -1.5"></a-curve-point>
+         </a-curve>
+
+         <a-curve id="track3a" closed="true" >
+            <a-curve-point position="2.512 1.5 -1.5"></a-curve-point>
+            <a-curve-point  position="2 1.5 -4.4"></a-curve-point>
+            <a-curve-point  position="0 1.5 -6.5"></a-curve-point>
+           
+         </a-curve>
+         <a-draw-curve curveref="#track1" material="shader: line; color: blue;" visible="false"></a-draw-curve>
+   
+       <a-circle id="tree2" title="Birch 2" scale=".1 .1 .1" class="hotspot birch2 clickable" look-at="#cam" position="6 3 3" hotspot-click></a-circle>
+       <a-circle id="tree1" title="Birch 1" scale=".1 .1 .1"  rotation="0 0 0"  position="1.5 1 1.5" class="hotspot birch1 clickable" look-at="#cam" hotspot-click >
+            <a-image id="ant1" src="#img2" position="0 0 .3" scale="1.5 1.5 1.5"  ></a-image>
+       </a-circle>
+         <a-gltf-model id="bkgrd"  gltf-model="#forest1"  position="0 -.3 0" scale=".5 .5 .5"  visible="true" ></a-gltf-model>
+         <a-gltf-model id="grass"  gltf-model="#grass1"  scale=".0005 .0005 .0005" position="0 -.20 0"   visible="true" ></a-gltf-model>
+         <a-gltf-model id="spruce1"  gltf-model="#spruce12m"  scale=".3 .3 .3" position="-1.5 0 -2.5"  rotation="0 0 0" visible="true" ></a-gltf-model>
+         <a-gltf-model id="raccoon1" visible="true"  gltf-model="#raccoon"  scale=".01 .01 .01" position="-3.6 -.15 -3"  rotation="0 0 0" class="hotspot raccoon clickable" hotspot-click >
+           <a-entity position="55 62.5 44" rotation="0 90 0" scale="1 1 1">
+            <a-camera id="cam2" zoom=".4" fov="95"  active="false"  rotation="0 0 0"   ></a-camera>
+            </a-entity>
+         </a-gltf-model>
+           <a-circle id="info1" title="Find Out More" scale=".1 .1 .1"  rotation="0 90 0"  position="-.27 .6 -4.8" class="hotspot info1 clickable" look-at="#cam" hotspot-click >
+            <a-image  src="#iconInfo" position="0 0 .3" scale="1.5 1.5 1.5"  ></a-image>
+       </a-circle>
+     
+ <a-entity  id="cursor" cursor="rayOrigin: mouse" raycaster="objects: .clickable;"></a-entity>
+ <a-entity light="type: ambient; color: #ffe; intensity:1;"></a-entity>
+<a-entity position="0 15 0" light="type: directional; color: #ffe; intensity:1.25;"></a-entity>
+
+        <a-camera id="cam" zoom=".75" fov="95"  active="true"  rotation="0 0 0"  position="0 1 0"   position-listener   >
+            <a-entity id="hud" rotation="-90 0 -90" scale=".18 .31 .35" overlay   >
+                <a-gltf-model id="book2"  src="#book5"  class="hotspot" visible="false" position="0 0 0"  material="metalness:0;" ></a-gltf-model>
+</a-entity>
+
+        </a-camera>
+    </a-scene>
+    <div class="page-elem">
+        <img class="racc1" src="./assets/pages/racc1.png" />
+        <img class="racc6" src="./assets/pages/racc6.png" />
+        <img class="racc5" src="./assets/pages/racc5.png" />
+        <img class="raccp1" src="./assets/pages/raccoon-photo1.jpeg" />
+        
+        <div class="frame-wrapper" >
+<div class="tape1"></div>
+<div class="tape2"></div>
+<div class="label">Raccoon Skull</div>
+             <iframe id="model1" src="model-viewer.html" width="400" height="300" noscrolling border="0" ></iframe>
+      
+      
+            </div>
+       
+       <div class="video-wrapper">
+<video  controls>
+    <source src="assets/raccoon/raccoon.mp4" type="video/mp4">
+    </video>
+      
+</div>
+
+<div class="close-book">close</div>
+    </div>
+<div class="dist-overlay">
+<div id="Origin" >origin:</div>
+<div id="Rotation Reader" >reader:</div>
+<div id="Dist" >distance</div>
+<div id="Dist2" >distance</div>
+</div>  
+    <script>
+var distance1;
+        // <script src="https://raw.githack.com/jeromeetienne/AR.js/master/aframe/build/aframe-ar.min.js">
+   
+        //43.497710 -80.570740
+//        <a-entity gltf-model="./assets/magnemite/scene.gltf" rotation="0 180 0" scale="0.15 0.15 0.15" gps-entity-place="longitude: -80.570504; latitude: 43.497265;" animation-mixer/>
+//  <a-gltf-model id="locale2" src="#model1" rotation="0 180 0" scale="0.015 0.015 0.015"  animation-mixer="clip: DancingTwerk" gps-entity-place="longitude: -80.570667; latitude: 43.497601;" scale="2.5 2.5 2.5"  class="hotspot snaggle" look-controls-enabled='false' arjs-look-controls='smoothingFactor: 0.1'  look-at="[gps-camera]"></a-gltf-model>
+ //  <a-image id="locale3" src="#img1" rotation="0 180 0"  scale="2.5 2.5 2.5" gps-entity-place="longitude:-80.570665; latitude: 43.497871;" class="hotspot glare" look-controls-enabled='false' arjs-look-controls='smoothingFactor: 0.1'  look-at="[gps-camera]"></a-image>
+  //<a-asset-item id="model1"  src="assets/dancer5.glb" ></a-asset-item>      
+//   <a-image id="locale4" src="#img1" rotation="0 180 0"  scale="1.5 1.5 1.5" gps-entity-place="longitude:-80.57090778; latitude: 43.49765251;" class="hotspot birch1" look-controls-enabled='false' arjs-look-controls='smoothingFactor: 0.05'  look-at="[gps-camera]"></a-image>
+//         <a-image id="locale5" src="#img2" rotation="0 180 0"  scale="1.5 1.5 1.5" gps-entity-place="longitude:-80.57087151; latitude: 43.49755989;" class="hotspot birch2" look-controls-enabled='false' arjs-look-controls='smoothingFactor: 0.1'  look-at="[gps-camera]"></a-image>
+  // gpsMinDistance="6" gpsTimeInterval="5000"  
+
+(function(){
+    var locales =[
+{id:1,label:"Home", lat:"43.497694", long:"-80.570723", desc:"707 Jacob Lane", link:""},
+{id:2,label:"Snaggletooth", lat:"43.497601", long:"-80.570667", desc:"709 Jacob Lane", link:""},
+{id:3,label:"Hey Koolaid", lat:"43.497265", long:"-80.570504", desc:"627 Osprey", link:""},
+{id:4,label:"Glaremeisters", lat:"43.497871", long:"-80.570665", desc:"703 Jacob Lane", link:""},
+]
+
+
+var assets = document.getElementById("assetsPanel");
+
+var ranim;
+      console.log("assets:", assets)
+      if(assets !== null)   {                            
+      assets.addEventListener("loaded", (e)=>{
+      console.log("assets loaded");
+      setTimeout(()=>{
+        // initCursor()
+         setCamEvents()
+      },100)
+      })
+    }else{
+      setTimeout(()=>{
+        // initCursor()
+      },100)
+     
+    }
+
+    var raccoon = document.getElementById("raccoon1");
+
+raccoon.addEventListener("model-loaded",(e)=>{
+    console.log("raccoon loaded");
+    setupRaccoon();
+})
+
+
+})()
+
+
+
+
+var rPathComplete = false;
+function setPathEvents(){
+
+var raccoon = document.getElementById("raccoon1");
+console.log(raccoon.object3D.el.components)
+raccoon.addEventListener("movingended", ()=>{
+
+    console.log("motion complete");
+console.log(raccoon.components.alongpath)
+
+   // raccoon.removeAttribute("alongpath") //,"curve:'';")
+
+   var finishWalk =()=>{
+    ranim.playClip("Seat", 1, true, true,null,null )
+}
+var finishSmell= ()=>{
+    ranim.playClip("Trot_Forward", 1, true, true,null,null )
+    raccoon.setAttribute("alongpath", "curve: #track2;delay:0; dur:7800;loop:false;resetonplay:false;rotate:true")
+    rPathComplete = true;
+
+}
+
+
+
+if(rPathComplete === false){
+   ranim.stop(); 
+    raccoon.removeAttribute("alongpath") 
+ //raccoon.setAttribute("alongpath", "rotate:false;")
+
+ //
+//
+//
+setTimeout(()=>{
+    raccoon.object3D.rotation.y = 95;
+    //raccoon.setAttribute("rotation", "0 40 0")
+console.log(raccoon.object3D);
+ranim.playClip("Idle_Smell", 1, false, true,null,finishSmell )
+},50)
+
+}else{
+    ranim.playClip("Lie_Idle_1", 1, true, true,null,null );
+    var cam = document.getElementById("cam");
+var cam2 = document.getElementById("cam2");
+setTimeout(()=>{
+    cam.setAttribute("active", true)
+cam2.setAttribute("active", false)
+
+
+                 
+},1500)
+
+
+}
+
+})
+
+var waypoints = document.querySelectorAll(".way-point");
+console.log(waypoints)
+
+waypoints.forEach((item)=>{
+//     item.addEventListener("alongpath-trigger-activated", (e)=>{
+
+// console.log("trigger fired");
+// console.log(e);
+
+// })
+
+})
+
+}
+
+function setCamEvents(){
+console.log("set cam events")
+var camera = document.getElementById("cam").object3D;
+console.log(camera);
+
+console.log("cam pos update")
+//console.log(e)
+//console.log(visibleWidthAtZDepth(-2))
+var screenAspect = window.innerWidth / window.innerHeight;
+
+//console.log(screenAspect)
+//followRaccoon();
+
+
+
+setTimeout(()=>{
+
+},2000)
+var localH = visibleHeightAtZDepth(-1);
+var localW = localH * screenAspect;
+//console.log(localW)
+// position="-3.4 -1.9 -2" 
+var hudX = localW / 2 * -.8
+var hudY = -.5 //localH / 2 * -.9 
+setHudPosition(hudX,hudY, -1);  
+//setHudPosition(visibleWidthAtZDepth(-2), visibleHeightAtZDepth(-2), -2);  
+var book = document.getElementById("book2").object3D;
+
+
+
+window.addEventListener("gps-camera-update-position", (e)=>{
+//  alert("update cam position");
+console.log("cam pos update")
+console.log(e)
+try{
+    var hotspot = document.querySelector('.birch1');
+    var hotspot2 = document.querySelector('.birch2');
+//console.log(hotspot)
+//console.log(hotspot.position)
+
+var distanceMsg = hotspot.getAttribute('distanceMsg');
+distance1 = hotspot.getAttribute('distance');
+console.log(gpsCam)
+var newPos = gpsCam.latLonToWorld(43.49765251,-80.57090778)
+
+var pos = hotspot.getAttribute("position");
+    console.log("pos", pos)
+    console.log("newpos",newPos)
+var marker1 = document.getElementById("marker1").object3D;
+marker1.position.x = pos.x;
+marker1.position.z = pos.z;
+console.log("marker", marker1)
+
+var camPos = gpsCam.currentCoords.latitude + " | " + gpsCam.longitude;
+// console.log(distanceMsg)
+// if(distance < 15){
+//     window.navigator.vibrate(150,50,150);
+//}
+var distanceMsg2 = hotspot2.getAttribute('distanceMsg');
+// console.log(distanceMsg);
+var originTxt = document.getElementById("Origin")
+var distTxt = document.getElementById("Dist")
+var distTxt2 = document.getElementById("Dist2")
+originTxt.innerHTML = distanceMsg;
+distTxt.innerHTML = distanceMsg;
+distTxt2.innerHTML = distanceMsg2;
+
+
+//alert(distanceMsg);
+}catch(err){
+    console.log(err);
+}
+})
+
+window.addEventListener("gps-camera-origin-coord-set", (e)=>{
+
+console.log("cam pos origin loaded");
+// alert("set cam position");
+console.log(e)
+try{
+    var hotspot = document.querySelector('.birch1');
+    var hotspot2 = document.querySelector('.birch2');
+//console.log(hotspot)
+//console.log(hotspot.position)
+
+var distanceMsg = hotspot.getAttribute('distanceMsg');
+distance1 = hotspot.getAttribute('distance');
+// console.log(distanceMsg)
+// if(distance < 15){
+//     window.navigator.vibrate(150,50,150);
+//}
+var distanceMsg2 = hotspot2.getAttribute('distanceMsg');
+// console.log(distanceMsg);
+var distTxt = document.getElementById("Dist")
+var distTxt2 = document.getElementById("Dist2")
+distTxt.innerHTML = distanceMsg;
+distTxt2.innerHTML = distanceMsg2;
+
+
+//alert(distanceMsg);
+}catch(err){
+    console.log(err);
+}
+})
+
+
+}
+
+
+setupRaccoon = ()=>{
+
+    ranim = handleAnimations("raccoon1")
+    
+    ranim.setOffsets();
+    ranim.removeTracks(["CG.quaternion"])
+    
+    ranim.removeTracks(["CG.position"])
+  //  followRaccoon();
+}
+
+
+ followRaccoon = ()=>{
+var cam = document.getElementById("cam");
+var cam2 = document.getElementById("cam2");
+
+cam.setAttribute("active", false)
+cam2.setAttribute("active", true)
+var raccoon = document.getElementById("raccoon1");
+raccoon.setAttribute("alongpath","curve: #track1;dur:5000;loop:false;resetonplay:false;rotate:true")
+   
+
+var finishSmell = ()=>{
+
+    ranim.playClip("Action_Eat", 1, false, true,null,finishEat )
+
+}
+   
+
+var finishEat = ()=>{
+
+    ranim.playClip("idle", 1, true, true,null,null )
+
+}
+setPathEvents()
+ ranim.playClip("Trot_Forward", 1, true, true,null,null )
+
+ }
+    </script>
+</body>

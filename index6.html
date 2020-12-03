@@ -48,7 +48,7 @@ gesture-detector
 
  <a-entity  id="cursor" cursor="rayOrigin: mouse" raycaster="objects: .clickable;"></a-entity>
        
-        <a-camera id="cam" gps-camera rotation-reader gpsMinDistance="2" rotation="0 180 0" gpsTimeInterval="250" look-controls="false" arjs-look-controls='smoothingFactor: 0.1'  ></a-camera>
+        <a-camera id="cam" gps-camera rotation-reader gpsMinDistance="2" rotation="0 180 0" gpsTimeInterval="250" look-controls="false" arjs-look-controls='smoothingFactor: 0.1 ;reverseMouseDrag:true; touchEnabled: false;' ></a-camera>
     </a-scene>
 <div class="dist-overlay">
 <div id="Origin" >origin:</div>
@@ -134,7 +134,7 @@ function setCamEvents(){
 var camera = document.getElementById("cam").object3D;
 console.log(camera);
 
-var gpsCam = camera.el.components["gps-projected-camera"];
+var gpsCam = camera.el.components["gps-camera"];
 console.log(gpsCam);
 window.addEventListener("camera-init", (e)=>{
 // alert("init cam");

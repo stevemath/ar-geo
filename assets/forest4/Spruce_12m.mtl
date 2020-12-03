@@ -1,0 +1,15 @@
+# Blender MTL File: 'Pines And Spruce Trees.blend'
+# Material Count: 1
+
+newmtl Spruce
+Ns 127.450980
+Ka 1.000000 1.000000 1.000000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 1
+map_Bump textures\\Spruce_Nor.png
+map_Kd textures\\Spruce_Col.png
+map_d textures\\Spruce_Col.png

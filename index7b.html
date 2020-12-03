@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>GeoAR.js demo</title>
+    <link rel="stylesheet" href="css/pagestyles.css">
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+  <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+  
+    <script src="https://raw.githack.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
+  
+    <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
+
+    
+<script src='js/cursor.js' defer ></script>
+<script src='js/gesture-detector.js'></script>
+<script src='js/gesture-handler.js'></script>
+<script src='js/aframe-components-nft.js'  ></script>
+
+    <script>
+        // clickable is dependent on this
+     THREEx.ArToolkitContext.baseURL = 'https://raw.githack.com/jeromeetienne/ar.js/master/three.js/'
+    </script>
+</head>
+
+<body style='margin: 0; overflow: hidden;'>
+    <a-scene
+gesture-detector
+    vr-mode-ui="enabled: true"
+        arjs='debugUIEnabled: false;'>
+        <a-assets id="assetsPanel" timeout="35000">
+
+            <img id="img1"  src="assets/raccoon.png"   />
+            <img id="img2"  src="assets/ant.png"   />
+            <img id="bkgrd1"  src="assets/pano-backyard.jpg"   />
+            <a-asset-item id="forest2"  src="assets/forest2/source/pine.glb" ></a-asset-item>
+            <a-asset-item id="book1a"  src="assets/book/riggedbook.glb" ></a-asset-item>
+            <a-asset-item id="book1b"  src="assets/book/scene.gltf" ></a-asset-item>
+            <a-asset-item id="book2b" src="assets/book/book2b.gltf" ></a-asset-item>
+            <a-asset-item id="book2c" src="assets/book/book2b2.gltf" ></a-asset-item>
+            <a-asset-item id="book3a" src="assets/book/book3.gltf" ></a-asset-item>
+            <a-asset-item id="book3b" src="assets/book/book3b.glb" ></a-asset-item>
+           </a-assets>
+           <a-gltf-model id="book1"  src="#book3a"  scale=".3 .3 .3" position="-2 .75 -3" animation-mixer="clip:*;repetitions:false;" material="src:assets/book/textures/booktexture.jpg;metalness:0;" ></a-gltf-model>
+    
+
+<a-entity id="box1" scale=".3 .3 .2" geometry="primitive: cylinder" position="-1 1.25 0"  material="src:./assets/book/textures/booktexture.jpg; roughness: 1; metalness: 0" ></a-entity>
+<a-circle id="tree2" title="Birch 2" scale=".1 .1 .1" class="hotspot birch2 clickable" look-at="#cam" position="6 3 3" hotspot-click></a-circle>
+<a-circle id="tree1" title="Birch 1" scale=".1 .1 .1"  rotation="0 0 0"  position="1.5 1 1.5" class="hotspot birch1 clickable" look-at="#cam" hotspot-click >
+     <a-image id="ant1" src="#img2" position="0 0 .3" scale="1.5 1.5 1.5"  ></a-image>
+</a-circle>
+
+<a-gltf-model id="bkgrd"  gltf-model="#forest2"  scale=".5 .5 .5"  ></a-gltf-model>
+<a-entity light="type: ambient; color: #ffe; intensity:1;"></a-entity>
+<a-entity position="0 15 0" light="type: directional; color: #ffe; intensity:3.5;"></a-entity>
+
+<a-entity  id="cursor" cursor="rayOrigin: mouse" raycaster="objects: .clickable;"></a-entity>
+ <a-camera id="cam" zoom=".75" fov="95"    rotation="0 180 0"  position="0 1 0" ></a-camera>
+</a-scene>
+
+</body>
