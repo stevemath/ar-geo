@@ -102,7 +102,7 @@ gesture-detector
      
         <a-camera id="cam" zoom=".75"   active="true"  rotation="0 0 0"  position="0 1 0"   position-listener   >
             
- <a-entity  id="cursor" cursor="fuse:true;rayOrigin: mouse;" position="0 0 -1"
+ <a-entity  id="cursor" cursor="fuse:true;fuseTimeout:500;" position="0 0 -1"
  geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
  material="color: black; shader: flat" raycaster="objects: .clickable;"></a-entity>
  <a-entity light="type: ambient; color: #ffe; intensity:1;"></a-entity>
