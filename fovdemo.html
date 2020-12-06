@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>GeoAR.js demo</title>
+    <link rel="stylesheet" href="css/pagestyles.css">
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+      
+<script src='js/cursor.js' defer ></script>
+    <script>
+        // clickable is dependent on this
+     //THREEx.ArToolkitContext.baseURL = 'https://raw.githack.com/jeromeetienne/ar.js/master/three.js/'
+    </script>
+</head>
+
+<body style='margin: 0; overflow: hidden;'>
+    <div id="sceneContainer">
+    <a-scene  id="scene"  embedded    >
+        <a-assets id="assetsPanel" timeout="35000">
+            <img id="360view"  src="assets/park.jpg" />
+         
+            <img  id="bkgrd" src="assets/landscape2.jpg" />
+            
+           </a-assets>
+
+         <a-image  visible="false" src="#bkgrd" class="filtre filtre--r" width="15" height="5" position="0 1 -3" ></a-image>
+<a-sky src="#360view"></a-sky>
+        <a-camera id="cam" zoom=".35" fov="55" 
+        
+        look-controls-enabled="false"   position="0 1 0" >
+          
+
+        </a-camera>
+    </a-scene>
+</div>
+
+<svg height="0">
+    <defs>
+      <mask id="mask-radial">
+        <rect width="400" height="300" fill="url(#g1)"></rect>
+        <radialGradient id="g1" cx="50%" cy="50%" r="50%">
+          <stop stop-color="black" offset="50%"/>
+          <stop stop-color="white" offset="110%"/>
+        </radialGradient>
+      </mask>
+      <mask id="mask-linear">
+        <rect width="400" height="300" fill="url(#l1)"></rect>
+        <linearGradient id="l1" x1="0" y1="0" x2="0" y2="1">
+          <stop stop-color="white" offset="0%"/>
+          <stop stop-color="black" offset="30%"/>
+          <stop stop-color="white" offset="100%"/>
+        </linearGradient>
+      </mask>
+      <filter id="filtre1">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="5"/>
+      </filter>
+      <filter id="filtre2">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="3"/>
+      </filter>
+    </defs>
+    </svg>
+    <script>
+
+(function(){
+
+    
+//cam.updateProjectionMatrix();
+setTimeout(()=>{
+
+var scene = document.getElementById("scene")
+//scene.renderer.setSize(500,500)
+// animation="property:fov;to:55;dur:5000;"
+//animation__2="property:zoom;to:.35;dur:5000;"
+
+var cam = scene.camera ;//;
+// cam.setViewOffset(1900,780,  0, 0, 1900,780 );
+
+// cam.view.width = 500;
+// cam.view.fullWidth = 500;
+// cam.view.height = 500;
+// cam.view.fullHeight = 500;
+//cam.aspect=.5;
+//cam.updateProjectionMatrix();
+console.log(cam)
+cam.aspect=.5;
+cam.updateProjectionMatrix();
+
+//cam.el.setAttribute("animation", "property:aspect;to:2,dur:8000;")
+console.log(cam.view)
+
+
+setTimeout(()=>{
+   // cam.setViewOffset(1500,1050,  0, 0, 1500,1050 );
+ //  cam.aspect=3;
+  // cam.updateProjectionMatrix();
+  var aspect = setInterval(()=>{
+if(cam.aspect <2){
+    cam.aspect= cam.aspect + .01;
+cam.updateProjectionMatrix();
+
+}else{
+    clearInterval(aspect)
+}
+
+
+},50)
+
+},3000)
+},250)
+
+
+// let rect = this.renderer.domElement.getBoundingClientRect();
+// 		camera.aspect = rect.width / rect.height;
+// 		camera.updateProjectionMatrix();
+// 		renderer.setSize( rect.width, rect.height );
+// model.addEventListener("animationcomplete", (e)=>{
+
+//     //console.log(e);
+   
+//     if(e.detail.name === "animation"){
+//        // console.log("anim y")
+//         e.target.setAttribute("animation__y", "enabled:true;");
+//         e.target.setAttribute("animation", "enabled:false")
+       
+//     }else{
+//      //   console.log("reset animx")
+//        // e.target.removeAttribute("animation")
+//        // e.target.setAttribute("animation", "enabled:true;autoplay:true");
+      
+//        if(xr === 0){
+//            xr =360;
+//        }else{
+//            xr = 0;
+//            if(yr === 0){
+//            yr =360;
+//        }else{
+//            yr = 0;
+//        }
+//        }
+
+//        var from = "from:" + xr  + " " + yr + " 0"
+//         e.target.setAttribute("animation__y", "enabled:true; " + from);
+        
+//     }
+// });
+
+
+})()
+
+    </script>
+</body>

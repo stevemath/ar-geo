@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>GeoAR.js demo</title>
+    <link rel="stylesheet" href="css/pagestyles.css">
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+      
+<script src='js/cursor.js' defer ></script>
+    <script>
+        // clickable is dependent on this
+     //THREEx.ArToolkitContext.baseURL = 'https://raw.githack.com/jeromeetienne/ar.js/master/three.js/'
+    </script>
+</head>
+
+<body style='margin: 0; overflow: hidden;'>
+    <script>
+
+        (function(){
+        
+            AFRAME.registerComponent('cursor-listener', {
+          init: function () {
+            var lastIndex = -1;
+            var COLORS = ['red', 'green', 'blue'];
+            this.el.addEventListener('click', function (evt) {
+              lastIndex = (lastIndex + 1) % COLORS.length;
+              this.setAttribute('material', 'color', COLORS[lastIndex]);
+              console.log('I was clicked at: ', evt.detail.intersection.point);
+            });
+          }
+        });
+        
+        })()
+        
+            </script>
+   
+    <a-scene    embedded    >
+      
+       <a-camera look-controls>
+       <a-entity cursor="fuse: true; fuseTimeout: 500"
+                 position="0 0 -.2"
+                 geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
+                 material="color: black; shader: flat">
+       </a-entity>
+     </a-camera>
+     
+     <a-entity id="box" position=".5 2 -1.5" cursor-listener geometry="primitive: box" material="color: blue"></a-entity>
+     
+    </a-scene>
+
+  
+</body>

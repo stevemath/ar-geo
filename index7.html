@@ -43,7 +43,20 @@
 </head>
 
 <body style='margin: 0; overflow: hidden;'>
-   
+   <script>
+        AFRAME.registerComponent('cursor-listener', {
+          init: function () {
+            var lastIndex = -1;
+            var COLORS = ['red', 'green', 'blue'];
+            this.el.addEventListener('click', function (evt) {
+                console.log(evt)
+              lastIndex = (lastIndex + 1) % COLORS.length;
+              this.setAttribute('material', 'color', COLORS[lastIndex]);
+              console.log('I was clicked at: ', evt.detail.intersection.point);
+            });
+          }
+        });
+   </script>
     <a-scene
 gesture-detector
     vr-mode-ui="enabled: true"
@@ -55,6 +68,7 @@ gesture-detector
             <img id="iconInfo"  src="assets/info.png"   />
            
              <a-asset-item id="forest1"  src="assets/forest2/source/pine.glb" ></a-asset-item>
+             <img id="grass2src"  src="assets/forest2/textures/grass.jpg" ></img>
             <a-asset-item id="spruce12m"  src="assets/forest5/spruce16.gltf" ></a-asset-item>
             <a-asset-item id="forest2"  src="assets/forest2/source/pine.glb" ></a-asset-item>
             <a-asset-item id="raccoon"  src="assets/raccoon-animation/scene.gltf" ></a-asset-item>
@@ -65,16 +79,16 @@ gesture-detector
 
 
 <a-curve id="track1" closed="true" >
-            <a-curve-point position="-3.6 -.15 -3"></a-curve-point>
-            <a-curve-point  position="-1 -.15 -3"></a-curve-point>
-            <a-curve-point  position="0 -.15 -1.85"></a-curve-point>
+            <a-curve-point position="-3.6 0 -3"></a-curve-point>
+            <a-curve-point  position="-1 0 -3"></a-curve-point>
+            <a-curve-point  position="0 0 -1.85"></a-curve-point>
            
          </a-curve>
 <a-curve id="track2" closed="true" >
-    <a-curve-point  position="0 -.15 -1.85"></a-curve-point>
+    <a-curve-point  position="0 0 -1.85"></a-curve-point>
            
-            <a-curve-point   position="2 -.15 -2"></a-curve-point>
-            <a-curve-point position="3.75 -.15 -1.5"></a-curve-point>
+            <a-curve-point   position="2 0 -2"></a-curve-point>
+            <a-curve-point position="3.75 0 -1.5"></a-curve-point>
          </a-curve>
 
          <a-curve id="track3a" closed="true" >
@@ -84,35 +98,37 @@ gesture-detector
            
          </a-curve>
          <a-draw-curve curveref="#track1" material="shader: line; color: blue;" visible="false"></a-draw-curve>
-   
-       <a-circle id="tree2" title="Birch 2" scale=".1 .1 .1" class="hotspot birch2 clickable" look-at="#cam" position="6 3 3" hotspot-click></a-circle>
-       <a-circle id="tree1" title="Birch 1" scale=".1 .1 .1"  rotation="0 0 0"  position="1.5 1 1.5" class="hotspot birch1 clickable" look-at="#cam" hotspot-click >
+         <a-circle id="grass2"  rotation="90 0 0" material="src: #grass2src; repeat: 30 30" scale="25 25 25" class="hotspot  clickablex" look-at="#cam" position="0 0 0" hotspot-click></a-circle>
+    
+       <a-circle id="tree2" title="Birch 2" scale=".1 .1 .1" class="hotspot birch2 clickablex" look-at="#cam" position="6 3 3" hotspot-click></a-circle>
+       <a-circle id="tree1" title="Birch 1" scale=".1 .1 .1"  rotation="0 0 0"  position="1.5 1 1.5" class="hotspot birch1 clickablex" look-at="#cam" hotspot-click >
             <a-image id="ant1" src="#img2" position="0 0 .3" scale="1.5 1.5 1.5"  ></a-image>
        </a-circle>
-         <a-gltf-model id="bkgrd"  gltf-model="#forest1"  position="0 -.3 0" scale=".5 .5 .5"  visible="true" ></a-gltf-model>
+         <a-gltf-model id="bkgrd"  gltf-model="#forest1"  position="0 -.3 0" scale=".5 .5 .5"  visible="false" ></a-gltf-model>
            <a-gltf-model id="spruce1"  gltf-model="#spruce12m"  scale=".3 .3 .3" position="-1.5 0 -2.5"  rotation="0 0 0" visible="true" ></a-gltf-model>
-         <a-gltf-model id="raccoon1" visible="true"  gltf-model="#raccoon"  scale=".01 .01 .01" position="-3.6 -.15 -3"  rotation="0 0 0" class="hotspot raccoon clickable" hotspot-click >
+         <a-gltf-model id="raccoon1" visible="true"  gltf-model="#raccoon"  scale=".01 .01 .01" position="-3.6 0 -3"  rotation="0 0 0" class="hotspot raccoon clickablex"  hotspot-click >
            <a-entity position="55 62.5 44" rotation="0 90 0" scale="1 1 1">
             <a-camera id="cam2" zoom=".4" fov="95"  active="false"  rotation="0 0 0"   ></a-camera>
             </a-entity>
          </a-gltf-model>
-           <a-circle id="info1" title="Find Out More" scale=".2 .2 .2"  rotation="0 90 0"  position="-.27 .6 -2.8" class="hotspot info1 clickable" look-at="#cam" hotspot-click >
-            <a-image  src="#iconInfo" position="0 0 .3" scale="1.5 1.5 1.5"  ></a-image>
-       </a-circle>
+         
      
-        <a-camera id="cam" zoom=".75"   active="true"  rotation="0 0 0"  position="0 1 0"   position-listener   >
+        <a-camera id="cam" zoom=".75"   active="true"  rotation="0 0 0"  position="0 1 0"    >
             
- <a-entity  id="cursor" cursor="fuse:true;fuseTimeout:500;" position="0 0 -1"
- geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
- material="color: black; shader: flat" raycaster="objects: .clickable;"></a-entity>
- <a-entity light="type: ambient; color: #ffe; intensity:1;"></a-entity>
-<a-entity position="0 15 0" light="type: directional; color: #ffe; intensity:1.25;"></a-entity>
-
-            <a-entity id="hud" rotation="-90 0 -90" scale=".18 .31 .35" overlay   >
-                <a-gltf-model id="book2"  src="#book5"  class="hotspot" visible="false" position="0 0 0"  material="metalness:0;" ></a-gltf-model>
-</a-entity>
-
+            <a-entity cursor="fuse: true; fuseTimeout: 500"
+            position="0 0 -.5"
+            geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
+            material="color: black; shader: flat">
+  </a-entity>
         </a-camera>
+        <a-entity id="info1" title="Find Out More"   rotation="0 0 0" geometry="primitive: circle"  position=".47 1.6 -2.8" class="clickable"  cursor-listener >  </a-entity>
+     <a-entity id="box" position=".5 2 -1.5" cursor-listener geometry="primitive: plane" material="color: blue" class="clickable"></a-entity>
+     <a-entity position="0 15 0" light="type: directional; color: #ffe; intensity:1.25;"></a-entity>
+<a-entity light="type: ambient; color: #ffe; intensity:1;"></a-entity>
+
+        <a-entity id="hud" rotation="-90 0 -90" scale=".18 .31 .35" overlay   >
+            <a-gltf-model id="book2"  src="#book5"  class="hotspot" visible="false" position="0 0 0"  material="metalness:0;" ></a-gltf-model>
+</a-entity>
     </a-scene>
     <div class="page-elem">
         <img class="racc1" src="./assets/pages/racc1.png" />
@@ -219,7 +235,7 @@ console.log(raccoon.components.alongpath)
 }
 var finishSmell= ()=>{
     ranim.playClip("Trot_Forward", 1, true, true,null,null )
-    raccoon.setAttribute("alongpath", "curve: #track2;delay:0; dur:7800;loop:false;resetonplay:false;rotate:true")
+    raccoon.setAttribute("alongpath", "curve: #track2;delay:0; dur:3800;loop:false;resetonplay:false;rotate:true")
     rPathComplete = true;
 
 }
@@ -401,7 +417,7 @@ var cam2 = document.getElementById("cam2");
 cam.setAttribute("active", false)
 cam2.setAttribute("active", true)
 var raccoon = document.getElementById("raccoon1");
-raccoon.setAttribute("alongpath","curve: #track1;dur:5000;loop:false;resetonplay:false;rotate:true")
+raccoon.setAttribute("alongpath","curve: #track1;dur:3000;loop:false;resetonplay:false;rotate:true")
    
 
 var finishSmell = ()=>{
