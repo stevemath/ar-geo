@@ -98,15 +98,15 @@ gesture-detector
            
          </a-curve>
          <a-draw-curve curveref="#track1" material="shader: line; color: blue;" visible="false"></a-draw-curve>
-         <a-circle id="grass2"  rotation="90 0 0" material="src: #grass2src; repeat: 10 10" scale="15 15 15" class="hotspot  clickablex" look-at="#cam" position="0 0 0" hotspot-click></a-circle>
+         <a-circle id="grass2"  rotation="90 0 90" material="src: #grass2src; repeat: 10 10" scale="15 15 15" class="hotspot  clickablex" look-at="#cam" position="0 0 0" hotspot-click></a-circle>
     
        <a-circle id="tree2" title="Birch 2" scale=".1 .1 .1" class="hotspot birch2 clickablex" look-at="#cam" position="6 3 3" hotspot-click></a-circle>
        <a-circle id="tree1" title="Birch 1" scale=".1 .1 .1"  rotation="0 0 0"  position="1.5 1 1.5" class="hotspot birch1 clickablex" look-at="#cam" hotspot-click >
             <a-image id="ant1" src="#img2" position="0 0 .3" scale="1.5 1.5 1.5"  ></a-image>
        </a-circle>
          <a-gltf-model id="bkgrd"  gltf-model="#forest1"  position="0 -.3 0" scale=".5 .5 .5"  visible="false" ></a-gltf-model>
-           <a-gltf-model id="spruce1"  gltf-model="#spruce12m"  scale=".3 .3 .3" position="-1.5 0 -2.5"  rotation="0 0 0" visible="true" ></a-gltf-model>
-         <a-gltf-model id="raccoon1" visible="true"  gltf-model="#raccoon"  scale=".01 .01 .01" position="-3.6 0 -3"  rotation="0 0 0" class="hotspot raccoon clickablex"  hotspot-click >
+           <a-gltf-model id="spruce1"  gltf-model="#spruce12m"  scale=".3 .3 .3" position="-1.5 0 -5.5"  rotation="0 0 0" visible="true" ></a-gltf-model>
+         <a-gltf-model id="raccoon1" visible="true"  gltf-model="#raccoon"  scale=".01 .01 .01" position="-3.6 0 -3.5"  rotation="0 0 0" class="hotspot raccoon clickablex"  hotspot-click >
            <a-entity position="55 62.5 44" rotation="0 90 0" scale="1 1 1">
             <a-camera id="cam2" zoom=".4" fov="95"  active="false"  rotation="0 0 0"   ></a-camera>
             </a-entity>
@@ -115,14 +115,13 @@ gesture-detector
      
         <a-camera id="cam" zoom=".75"   active="true"  rotation="0 0 0"  position="0 1 0"    >
             
-            <a-entity cursor="fuse: true; fuseTimeout: 500"
-            position="0 0 -.5"
-            geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
+            <a-entity cursor="fuse: true; fuseTimeout: 500; rayOrigin:entity;"
+            position="0 0 -1"
+            geometry="primitive: ring; radiusInner: 0.01; radiusOuter: 0.02"
             material="color: black; shader: flat">
   </a-entity>
         </a-camera>
-        <a-entity id="info1" title="Find Out More"   rotation="0 0 0" geometry="primitive: circle"  position=".47 1.6 -2.8" class="clickable"  cursor-listener >  </a-entity>
-     <a-entity id="box" position=".5 2 -1.5" cursor-listener geometry="primitive: plane" material="color: blue" class="clickable"></a-entity>
+        <a-entity id="info1" title="Find Out More" scale=".25 .25 .25" geometry="primitive: circle"  material="color: #505050" position=".5 2 -2.8" class="clickable"  cursor-listener >  </a-entity>
      <a-entity position="0 15 0" light="type: directional; color: #ffe; intensity:1.25;"></a-entity>
 <a-entity light="type: ambient; color: #ffe; intensity:1;"></a-entity>
 
@@ -163,6 +162,8 @@ gesture-detector
     <script>
 var distance1;
 
+//   <a-entity id="box" position=".5 2 -1.5" cursor-listener geometry="primitive: circle" material="color: blue" class="clickable" visible="false" ></a-entity>
+   
 //  <a-asset-item id="grass1"  src="assets/grass/grass2.gltf" ></a-asset-item>
            //  <a-gltf-model id="grass"  gltf-model="#grass1"  scale=".0005 .0005 .0005" position="0 -.20 0"   visible="true" ></a-gltf-model>
       
