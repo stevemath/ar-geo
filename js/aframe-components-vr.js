@@ -44,7 +44,7 @@ var bookOpen = false;
          // var data = this.data;
           var el = this.el;  
          console.log(el)
-         el.addEventListener('mousedown', function (e) {
+         el.addEventListener('click', function (e) {
           window.navigator.vibrate(200);
           const camera = AFRAME.scenes[0].camera;
   var link =   document.getElementById(e.target.id);

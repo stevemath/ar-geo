@@ -48,14 +48,61 @@
           init: function () {
             var lastIndex = -1;
             var COLORS = ['red', 'green', 'blue'];
-            this.el.addEventListener('click', function (evt) {
-                console.log(evt)
+            this.el.addEventListener('click', function (e) {
+                console.log(e)
               lastIndex = (lastIndex + 1) % COLORS.length;
               this.setAttribute('material', 'color', COLORS[lastIndex]);
-              console.log('I was clicked at: ', evt.detail.intersection.point);
+              console.log('I was clicked at: ', e.detail.intersection.point);
+
             });
           }
         });
+
+        AFRAME.registerComponent('hotspot-click2', {
+   
+   init: function () {
+    // var data = this.data;
+     var el = this.el;  
+    console.log(el)
+    el.addEventListener('click', function (e) {
+        console.log("hotspot click")
+   
+console.log(e)
+console.log(e.target.id);
+ 
+if(e.target.id === "raccoon1"){
+followRaccoon();
+// console.log(camera.parent.position)
+// camera.position.z = 
+//   var newPos = camera.parent.position.x  + " " + camera.parent.position.y + " " + el.getAttribute("position").z * .6;
+//newPos = -2.5
+// camera.el.setAttribute("animation", "property:position;to:" + newPos + ";dur:850")
+}
+
+if(e.target.id ==="info1"){
+var book = document.getElementById("book2").object3D;
+
+handleBookClick()
+book.visible = true;
+}
+if(e.target.id === "book2"){
+
+//camera.el.setAttribute("animation", "property:position;to:'0 1 0';dur:850")
+handleBookClick()
+
+}
+
+ //  console.log(e.getAttribute("position"))
+
+// if(distance1 < 20){
+//     window.navigator.vibrate(150,50,150);
+// }
+     });
+
+    
+   }
+ });
+
    </script>
     <a-scene
 gesture-detector
@@ -98,7 +145,7 @@ gesture-detector
            
          </a-curve>
          <a-draw-curve curveref="#track1" material="shader: line; color: blue;" visible="false"></a-draw-curve>
-         <a-circle id="grass2"  rotation="90 0 90" material="src: #grass2src; repeat: 10 10" scale="15 15 15" class="hotspot  clickablex" look-at="#cam" position="0 0 0" hotspot-click></a-circle>
+         <a-circle id="grass2"  rotation="0 0 90" material="src: #grass2src; repeat: 10 10" scale="15 15 15" class="hotspot  clickablex" look-at="#cam" position="0 0 0" ></a-circle>
     
        <a-circle id="tree2" title="Birch 2" scale=".1 .1 .1" class="hotspot birch2 clickablex" look-at="#cam" position="6 3 3" hotspot-click></a-circle>
        <a-circle id="tree1" title="Birch 1" scale=".1 .1 .1"  rotation="0 0 0"  position="1.5 1 1.5" class="hotspot birch1 clickablex" look-at="#cam" hotspot-click >
@@ -106,7 +153,7 @@ gesture-detector
        </a-circle>
          <a-gltf-model id="bkgrd"  gltf-model="#forest1"  position="0 -.3 0" scale=".5 .5 .5"  visible="false" ></a-gltf-model>
            <a-gltf-model id="spruce1"  gltf-model="#spruce12m"  scale=".3 .3 .3" position="-1.5 0 -5.5"  rotation="0 0 0" visible="true" ></a-gltf-model>
-         <a-gltf-model id="raccoon1" visible="true"  gltf-model="#raccoon"  scale=".01 .01 .01" position="-3.6 0 -3.5"  rotation="0 0 0" class="hotspot raccoon clickablex"  hotspot-click >
+         <a-gltf-model id="raccoon1" visible="true"  gltf-model="#raccoon"  scale=".01 .01 .01" position="-3.6 0 -3.5"  rotation="0 0 0" class="hotspot raccoon clickable"  hotspot-click >
            <a-entity position="55 62.5 44" rotation="0 90 0" scale="1 1 1">
             <a-camera id="cam2" zoom=".4" fov="95"  active="false"  rotation="0 0 0"   ></a-camera>
             </a-entity>
@@ -115,19 +162,23 @@ gesture-detector
      
         <a-camera id="cam" zoom=".75"   active="true"  rotation="0 0 0"  position="0 1 0"    >
             
-            <a-entity cursor="fuse: true; fuseTimeout: 500; rayOrigin:entity;far:10;"
+            <a-entity cursor="fuse: true; fuseTimeout: 1000; rayOrigin:entity; "
             position="0 0 -1"
+            raycaster="objects:.clickable2"
             geometry="primitive: ring; radiusInner: 0.01; radiusOuter: 0.02"
             material="color: black; shader: flat">
+
+            <a-entity id="hud" rotation="-90 0 -90" scale=".75 .95 .95" overlay   >
+                <a-gltf-model id="book2"  src="#book5"  class="hotspot" visible="false" position="0 0 0"  material="metalness:0;" ></a-gltf-model>
+    </a-entity>
   </a-entity>
         </a-camera>
-        <a-entity id="info1" title="Find Out More" scale=".25 .25 .25" geometry="primitive: circle"  material="color: #505050" position=".5 2 -2.8" class="clickable"  cursor-listener >  </a-entity>
+        <a-entity id="box" position=".5 2 -2.8"  geometry="primitive: circle;radius:0.3;" material="color: blue;side:double;" class="clickable" visible="false" ></a-entity>
+        <a-entity id="info1" title="Find Out More" geometry="primitive: circle; radius:.25;"  material="color: #eee;side:double;" visible="true" position=".5 2 -2.8" class="clickable2"  hotspot-click >  </a-entity>
      <a-entity position="0 15 0" light="type: directional; color: #ffe; intensity:1.25;"></a-entity>
 <a-entity light="type: ambient; color: #ffe; intensity:1;"></a-entity>
 
-        <a-entity id="hud" rotation="-90 0 -90" scale=".18 .31 .35" overlay   >
-            <a-gltf-model id="book2"  src="#book5"  class="hotspot" visible="false" position="0 0 0"  material="metalness:0;" ></a-gltf-model>
-</a-entity>
+       
     </a-scene>
     <div class="page-elem">
         <img class="racc1" src="./assets/pages/racc1.png" />
@@ -162,6 +213,8 @@ gesture-detector
     <script>
 var distance1;
 
+
+// book scale scale=".18 .31 .35"
 //   <a-entity id="box" position=".5 2 -1.5" cursor-listener geometry="primitive: circle" material="color: blue" class="clickable" visible="false" ></a-entity>
    
 //  <a-asset-item id="grass1"  src="assets/grass/grass2.gltf" ></a-asset-item>
