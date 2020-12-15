@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>GeoAR.js demo</title>
+    <link rel="stylesheet" href="css/pagestyles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Covered+By+Your+Grace&family=Lato&display=swap" rel="stylesheet">
+</head>
+
+<body style='margin: 0; overflow: hidden;'>
+    <div id="imgContainer">
+   <img class="clip-circle" src="assets/fov1.jpg" />
+</div>
+<div class="buttons">
+<button onclick="showWideView()">WIDEVIEW</button>
+<button onclick="showNarrowView()">NARROW VIEW</button>
+</div>
+
+
+    <script>
+
+(function(){
+
+    
+  showWideView = function(){
+var circ = document.querySelector(".clip-circle");
+circ.style.animationName="expand"
+// circ.style.animationFillMode="normal"
+circ.style.animationDuration="5s";
+  }
+  showNarrowView = function(){
+var circ = document.querySelector(".clip-circle");
+ circ.style.animationDuration="5s";
+//circ.style.animationDirection="reverse"
+circ.style.animationName="contract"
+  }
+//cam.updateProjectionMatrix();
+//setTimeout(()=>{
+
+//var scene = document.getElementById("scene")
+//scene.renderer.setSize(500,500)
+// animation="property:fov;to:55;dur:5000;"
+//animation__2="property:zoom;to:.35;dur:5000;"
+
+// var cam = scene.camera ;//;
+// // cam.setViewOffset(1900,780,  0, 0, 1900,780 );
+
+// // cam.view.width = 500;
+// // cam.view.fullWidth = 500;
+// // cam.view.height = 500;
+// // cam.view.fullHeight = 500;
+// //cam.aspect=.5;
+// //cam.updateProjectionMatrix();
+// console.log(cam)
+// cam.aspect=.5;
+// cam.updateProjectionMatrix();
+
+// //cam.el.setAttribute("animation", "property:aspect;to:2,dur:8000;")
+// console.log(cam.view)
+
+
+// setTimeout(()=>{
+//    // cam.setViewOffset(1500,1050,  0, 0, 1500,1050 );
+//  //  cam.aspect=3;
+//   // cam.updateProjectionMatrix();
+//   var aspect = setInterval(()=>{
+// if(cam.aspect <2){
+//     cam.aspect= cam.aspect + .01;
+// cam.updateProjectionMatrix();
+
+// }else{
+//     clearInterval(aspect)
+// }
+
+
+// },50)
+
+// },3000)
+// },250)
+
+
+// let rect = this.renderer.domElement.getBoundingClientRect();
+// 		camera.aspect = rect.width / rect.height;
+// 		camera.updateProjectionMatrix();
+// 		renderer.setSize( rect.width, rect.height );
+// model.addEventListener("animationcomplete", (e)=>{
+
+//     //console.log(e);
+   
+//     if(e.detail.name === "animation"){
+//        // console.log("anim y")
+//         e.target.setAttribute("animation__y", "enabled:true;");
+//         e.target.setAttribute("animation", "enabled:false")
+       
+//     }else{
+//      //   console.log("reset animx")
+//        // e.target.removeAttribute("animation")
+//        // e.target.setAttribute("animation", "enabled:true;autoplay:true");
+      
+//        if(xr === 0){
+//            xr =360;
+//        }else{
+//            xr = 0;
+//            if(yr === 0){
+//            yr =360;
+//        }else{
+//            yr = 0;
+//        }
+//        }
+
+//        var from = "from:" + xr  + " " + yr + " 0"
+//         e.target.setAttribute("animation__y", "enabled:true; " + from);
+        
+//     }
+// });
+
+
+})()
+
+    </script>
+</body>

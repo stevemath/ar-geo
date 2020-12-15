@@ -256,3 +256,69 @@ bottom: -18%;
     mask: url('#mask-linear');
     filter: url('#filtre2');
   }
+
+  .buttons{
+      position:absolute;
+      left:10%;
+      top:7%;
+      z-index:10;
+  }
+
+  .buttons button{
+padding:15px;
+background-color:#8cce12;
+font-size:1.3em;
+color:#202020;
+font-family:"Lato";
+border-radius:7px;
+border:0px !important;
+outline:none !important;
+cursor:pointer;
+  }
+ .buttons  button:hover{
+background-color: #99ea12;
+  }
+
+  #imgContainer img{
+    clip-path: circle(20% at center);
+  }
+
+  .clip-circle {
+    /* clip-path: circle(20% at center); */
+    /* clip-path: circle(20% at center); */
+    animation-direction:normal;
+    animation-fill-mode: forwards;
+    animation-duration: 5s;
+    /* animation-name: expand; */
+  }
+
+  @keyframes expand{
+from{
+    clip-path: circle(20% at center); 
+}
+
+to{
+    clip-path: circle(65% at center);
+}
+
+  }
+  @keyframes contract{
+from{
+    clip-path: circle(65% at center); 
+}
+
+to{
+    clip-path: circle(20% at center);
+}
+
+  }
+  #imgContainer{
+      position:absolute;
+      width:100%;
+      height:100%;
+  }
+  #imgContainer img{
+    width:100%;
+    height:100%;
+    object-fit: cover;
+  }
